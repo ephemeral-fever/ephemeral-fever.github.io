@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>信息收集之搜索引擎 | Ephemeral-fever</title><meta name="keywords" content="信息收集"><meta name="author" content="GeJian"><meta name="copyright" content="GeJian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Google Hacking也可以用百度，不过谷歌的搜索引擎更强大 site功能：搜索指定域名的网页内容，可以用来搜索子域名、跟此域名相关的内容 示例：  site:zhihu.com        搜索跟zhihu.com相关的网页 “web安全” site:zhihu.com    搜索zhihu.com跟web安全相关的网页 “sql注入” site:csdn.net    在csdn.ne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息收集之搜索引擎">
+<meta property="og:url" content="http://example.com/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="Google Hacking也可以用百度，不过谷歌的搜索引擎更强大 site功能：搜索指定域名的网页内容，可以用来搜索子域名、跟此域名相关的内容 示例：  site:zhihu.com        搜索跟zhihu.com相关的网页 “web安全” site:zhihu.com    搜索zhihu.com跟web安全相关的网页 “sql注入” site:csdn.net    在csdn.ne">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic8.jpg">
+<meta property="article:published_time" content="2021-09-02T06:57:53.000Z">
+<meta property="article:modified_time" content="2021-09-02T06:59:44.357Z">
+<meta property="article:author" content="GeJian">
+<meta property="article:tag" content="信息收集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-02 14:59:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic8.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">信息收集之搜索引擎</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-02T06:57:53.000Z" title="发表于 2021-09-02 14:57:53">2021-09-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-02T06:59:44.357Z" title="更新于 2021-09-02 14:59:44">2021-09-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/notes/">notes</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h1><p>也可以用百度，不过谷歌的搜索引擎更强大</p>
+<h2 id="site"><a href="#site" class="headerlink" title="site"></a>site</h2><p>功能：搜索指定域名的网页内容，可以用来搜索子域名、跟此域名相关的内容</p>
+<p>示例：</p>
+<ol>
+<li>site:zhihu.com        搜索跟zhihu.com相关的网页</li>
+<li>“web安全” site:zhihu.com    搜索zhihu.com跟web安全相关的网页</li>
+<li>“sql注入” site:csdn.net    在csdn.net搜索跟sql注入相关的内容</li>
+<li>“教程” site:pan.baidu.com    在百度盘中搜索教程<br>注：中文引号、冒号也行</li>
+</ol>
+<h2 id="filetype"><a href="#filetype" class="headerlink" title="filetype"></a>filetype</h2><p>功能：搜索指定文件类型</p>
+<p>示例：</p>
+<ol>
+<li>“web安全” filetype:pdf        搜索跟web安全书籍相关的pdf文件</li>
+<li>nmap filetype:ppt        搜索跟nmap相关的ppt文件</li>
+<li>site:csdn.net filetype:pdf        搜索csdn网站中的pdf文件</li>
+<li>filetype:pdf site:<a target="_blank" rel="noopener" href="http://www.51cto.com/">www.51cto.com</a>    搜索51cto的pdf文件</li>
+</ol>
+<h2 id="inurl"><a href="#inurl" class="headerlink" title="inurl"></a>inurl</h2><p>功能：搜索url网址存在特定关键字的网页，可以用来搜寻有注入点的网站</p>
+<p>示例：</p>
+<ol>
+<li>inurl:.php?id=        搜索网址中有”php?id=“的网页</li>
+<li>inurl:view.php=?        搜索网址中有”view.php=“的网页</li>
+<li>inurl:.jsp?id=        搜索网址中有”jsp?id“的网页</li>
+<li>inurl:.asp?id=        搜索网址中有”asp?id“的网页</li>
+<li>inurl:/admin/login.php    搜索网址中有”/admin/login.php“的网页</li>
+<li>inurl:login        搜索网址中有”login“的登录网页</li>
+</ol>
+<h2 id="intitle"><a href="#intitle" class="headerlink" title="intitle"></a>intitle</h2><p>功能：搜索标题存在特定关键字的网页</p>
+<p>示例：</p>
+<ol>
+<li>intitle:后台登录            搜索网页标题是”后台登录“的相关网页</li>
+<li>intitle:后台管理 filetype:php        搜索网页标题是”后台管理“的php页面</li>
+<li>intitle:index of “keyword”        搜索此关键字相关的索引目录信息</li>
+<li>intitle:index of “parent directory”    搜索根目录相关的索引目录信息</li>
+<li>intitle:index of “password”        搜索密码相关的索引目录信息</li>
+<li>intitle:index of “login”        搜索登录页面信息</li>
+<li>intitle:index of “admin”        搜索后台管理页面信息</li>
+</ol>
+<h2 id="author"><a href="#author" class="headerlink" title="author"></a>author</h2><p>功能：搜索指定作者的文章</p>
+<p>示例：</p>
+<ol>
+<li>author: 鲁迅    搜索鲁迅的文章</li>
+</ol>
+<h2 id="intext"><a href="#intext" class="headerlink" title="intext"></a>intext</h2><p>功能：搜索正文存在关键词的网页</p>
+<p>示例：</p>
+<ol>
+<li>intext:Powered by Discuz        搜索Discuz论坛相关的页面</li>
+<li>intext:Powered by wordpress    搜索wordpress制作的博客网址</li>
+<li>intext:Powered by <em>CMS        搜索</em>CMS相关的页面</li>
+<li>intext:Powered by xxx inrul:login    搜索此类网址的后台登录页面</li>
+</ol>
+<h2 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h2><ol>
+<li>-keyword    强制结果不要出现此关键字，例如：电影 -黑客</li>
+<li><em>keyword    模糊搜索，强制结果包含此关键字，例如：电影 一个叫</em>决定*</li>
+<li>“keyword”    强制搜索结果出现此关键字，例如：书籍”web安全“</li>
+<li>~keyword    同时搜索近义词</li>
+<li>2008..2010    显示指定年份时间段的搜索结果</li>
+</ol>
+<h1 id="Shodan-Hacking"><a href="#Shodan-Hacking" class="headerlink" title="Shodan Hacking"></a>Shodan Hacking</h1><p><a target="_blank" rel="noopener" href="http://www.shodan.io/" title="Shodan">撒旦搜索引擎</a></p>
+<h2 id="ip"><a href="#ip" class="headerlink" title="ip"></a>ip</h2><p>直接输入ip地址进行搜索</p>
+<h2 id="service-protocol"><a href="#service-protocol" class="headerlink" title="service/protocol"></a>service/protocol</h2><p>示例：<br>http<br>http country:”DE”<br>http country:”DE” product:”Apache httpd”<br>http product:”Apache httpd”</p>
+<p>ssh<br>ssh default password<br>ssh default password country:”JP”</p>
+<h2 id="keyword"><a href="#keyword" class="headerlink" title="keyword"></a>keyword</h2><p>基于关键词搜索的思路是根据banner信息（设备指纹）来搜索</p>
+<p>示例：<br>“default password” country:”TH”<br>FTP anon successful</p>
+<h2 id="country"><a href="#country" class="headerlink" title="country"></a>country</h2><p>示例：<br>country:cn<br>country:us<br>country:jp</p>
+<h2 id="product"><a href="#product" class="headerlink" title="product"></a>product</h2><p>示例：</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></div><div class="post_share"><div class="social-share" data-image="/img/pic8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/08/28/Java%E5%9F%BA%E7%A1%80/"><img class="next-cover" src="/img/pic8.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java基础</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">GeJian</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Google-Hacking"><span class="toc-number">1.</span> <span class="toc-text">Google Hacking</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#site"><span class="toc-number">1.1.</span> <span class="toc-text">site</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#filetype"><span class="toc-number">1.2.</span> <span class="toc-text">filetype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inurl"><span class="toc-number">1.3.</span> <span class="toc-text">inurl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#intitle"><span class="toc-number">1.4.</span> <span class="toc-text">intitle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#author"><span class="toc-number">1.5.</span> <span class="toc-text">author</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#intext"><span class="toc-number">1.6.</span> <span class="toc-text">intext</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7"><span class="toc-number">1.7.</span> <span class="toc-text">符号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Shodan-Hacking"><span class="toc-number">2.</span> <span class="toc-text">Shodan Hacking</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ip"><span class="toc-number">2.1.</span> <span class="toc-text">ip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#service-protocol"><span class="toc-number">2.2.</span> <span class="toc-text">service&#x2F;protocol</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keyword"><span class="toc-number">2.3.</span> <span class="toc-text">keyword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#country"><span class="toc-number">2.4.</span> <span class="toc-text">country</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#product"><span class="toc-number">2.5.</span> <span class="toc-text">product</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" title="信息收集之搜索引擎"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信息收集之搜索引擎"/></a><div class="content"><a class="title" href="/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" title="信息收集之搜索引擎">信息收集之搜索引擎</a><time datetime="2021-09-02T06:57:53.000Z" title="发表于 2021-09-02 14:57:53">2021-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/28/Java%E5%9F%BA%E7%A1%80/" title="Java基础"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础"/></a><div class="content"><a class="title" href="/2021/08/28/Java%E5%9F%BA%E7%A1%80/" title="Java基础">Java基础</a><time datetime="2021-08-28T15:13:26.000Z" title="发表于 2021-08-28 23:13:26">2021-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/10/Markdown/" title="Markdown"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Markdown"/></a><div class="content"><a class="title" href="/2021/08/10/Markdown/" title="Markdown">Markdown</a><time datetime="2021-08-10T14:20:37.000Z" title="发表于 2021-08-10 22:20:37">2021-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/03/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux常用命令"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用命令"/></a><div class="content"><a class="title" href="/2021/08/03/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux常用命令">Linux常用命令</a><time datetime="2021-08-03T13:41:54.000Z" title="发表于 2021-08-03 21:41:54">2021-08-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/12/%E7%AE%97%E6%B3%95%E6%94%B6%E9%9B%86/" title="算法收集"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法收集"/></a><div class="content"><a class="title" href="/2021/05/12/%E7%AE%97%E6%B3%95%E6%94%B6%E9%9B%86/" title="算法收集">算法收集</a><time datetime="2021-05-12T09:30:41.000Z" title="发表于 2021-05-12 17:30:41">2021-05-12</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/pic5.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By GeJian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
