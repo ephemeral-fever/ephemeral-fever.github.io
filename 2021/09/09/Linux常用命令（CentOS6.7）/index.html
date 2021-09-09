@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux常用命令（CentOS6.7） | Ephemeral-fever</title><meta name="keywords" content="Linux"><meta name="author" content="GeJian"><meta name="copyright" content="GeJian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="基本操作Linux下命令行输入的一般形式如下 命令名 [ 选项] [参数1] [参数2] ……  命令名一般由小写的英文字母构成(大小写区分)，往往是表示相应功能的英文单词或单词的缩写； 选项是对命令行为的特别规定，分为长格式(–单词)和短格式(-字符)，一般常用短格式；多个短格式选项可用一个”-“ 连起来，如”ls -l -a”与”ls -la”相同； 参数提供命令运行的信息，或者是命令执行过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令（CentOS6.7）">
+<meta property="og:url" content="http://example.com/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="基本操作Linux下命令行输入的一般形式如下 命令名 [ 选项] [参数1] [参数2] ……  命令名一般由小写的英文字母构成(大小写区分)，往往是表示相应功能的英文单词或单词的缩写； 选项是对命令行为的特别规定，分为长格式(–单词)和短格式(-字符)，一般常用短格式；多个短格式选项可用一个”-“ 连起来，如”ls -l -a”与”ls -la”相同； 参数提供命令运行的信息，或者是命令执行过程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic8.jpg">
+<meta property="article:published_time" content="2021-09-09T06:15:32.000Z">
+<meta property="article:modified_time" content="2021-09-09T07:21:47.222Z">
+<meta property="article:author" content="GeJian">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-09 15:21:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic8.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">Linux常用命令（CentOS6.7）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-09T06:15:32.000Z" title="发表于 2021-09-09 14:15:32">2021-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-09T07:21:47.222Z" title="更新于 2021-09-09 15:21:47">2021-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/notes/">notes</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><p>Linux下命令行输入的一般形式如下</p>
+<p><code>命令名 [ 选项] [参数1] [参数2] …… </code></p>
+<p>命令名一般由小写的英文字母构成(<strong>大小写区分</strong>)，往往是表示相应功能的英文单词或单词的缩写；</p>
+<p>选项是对命令行为的特别规定，分为长格式(–单词)和短格式(-字符)，一般常用短格式；多个短格式选项可用一个”-“ 连起来，如”ls -l -a”与”ls -la”相同；</p>
+<p>参数提供命令运行的信息，或者是命令执行过程中所使用的文件名。通常参数是一些文件名，告诉命令从哪里可以得到输入，以及把输出送到什么地方。</p>
+<h2 id="命令行注销"><a href="#命令行注销" class="headerlink" title="命令行注销"></a>命令行注销</h2><ol>
+<li>logout 注销是登陆的相对操作，登陆系统后，若要离开系统，用户只要直接下达logout命令即可。</li>
+<li>exit命令用于退出当前shell，在shell脚本中可以终止当前脚本执行。</li>
+</ol>
+<h2 id="命令行关机"><a href="#命令行关机" class="headerlink" title="命令行关机"></a>命令行关机</h2><p>命令语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">shutdown [选项] [时间] [警告信息]</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>该命令只有root（超级用户）有权限</p>
+<p>命令中[选项]的含义：</p>
+<ul>
+<li><p>-r： 关闭系统并立即重启计算器。</p>
+</li>
+<li><p>-h： 关闭系统后不重新启动。</p>
+</li>
+<li><p>-k： 并不真正关机﹐只是送警告信号给每位登录者〔login〕。</p>
+</li>
+<li><p>-n： 快速关闭系统，不经过init程序关机。</p>
+</li>
+<li><p>-f： 快速关闭系统，重新启动时不进行磁盘检测。</p>
+</li>
+<li><p>-c： 中断关闭系统。</p>
+</li>
+</ul>
+<p>[时间]：设定关闭系统前的时间</p>
+<p>例如： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@bogon ~]# shutdown -h now</span><br><span class="line">立即关闭系统，其中，now相当于时间为0的状态</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@bogon ~]# shutdown -h 20:25</span><br><span class="line">系统在20:25点分关机，若在20:25之后执行此命令，则隔天执行。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@bogon ~]# shutdown -h +10</span><br><span class="line">系统在10分钟后关机。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@bogon ~]# shutdown -r now</span><br><span class="line">系统立刻重新启动。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@bogon ~]# shutdown -r +30 ‘This system will reboot’</span><br><span class="line">系统在30分钟后重新启动，并显示后面的消息给所有在线的用户。</span><br></pre></td></tr></table></figure>
+
+<h2 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h2><p>pwd 命令查看当前用户所处的工作目录的完整路径</p>
+<p>例如：显示用户当前工作目录路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@bogon ~]# cd &#x2F;usr&#x2F;src</span><br><span class="line"></span><br><span class="line">[root@bogon src]# pwd</span><br><span class="line"></span><br><span class="line">&#x2F;usr&#x2F;src   ← 显示用户的当前工作目录路径是 &#x2F;usr&#x2F;src</span><br></pre></td></tr></table></figure>
+
+<h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><p>用于显示该目录中所有子目录和文件信息。</p>
+<p>命令语法：</p>
+<p>ls [选项] [目录名]</p>
+<p>命令中部分[选项]的含义：</p>
+<ul>
+<li><p>-a： 列出目录下的所有文件，包括以 . 开头的隐含文件</p>
+</li>
+<li><p>-d：将目录像文件一样显示，而不是显示其下的文件。</p>
+</li>
+<li><p>-l： 列出文件的详细信息。</p>
+</li>
+<li><p>-h：人性化列出文件的大小（配合-l使用）</p>
+</li>
+</ul>
+<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令可以显示文本文件内容，或把几个文件内容附加到另一个文件中。 </p>
+<p>命令语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat [选项] [文件名]</span><br></pre></td></tr></table></figure>
+
+<p>cat主要有三大功能：</p>
+<ol>
+<li><p>一次显示整个文件:cat filename</p>
+</li>
+<li><p>从键盘创建一个文件:cat &gt; filename 只能创建新文件，不能编辑已有文</p>
+</li>
+<li><p>将几个文件合并为一个文件:</p>
+<p>cat file1 file2 &gt; file  会覆盖file原来的内容，文件不存在则创建它。</p>
+<p>cat file1 file2 &gt;&gt; file 不会覆盖file原来的内容，文件不存在则创建它。</p>
+</li>
+</ol>
+<p>[选项]的含义</p>
+<ul>
+<li><p>-n：由 1 开始对所有输出的行数编号</p>
+</li>
+<li><p>-b：只不过对于空白行不编号</p>
+</li>
+<li><p>-s：当遇到有连续两行以上的空白行，就代换为一行的空白行</p>
+</li>
+<li><p>-E：在每行结束处显示$</p>
+</li>
+</ul>
+<h2 id="who命令"><a href="#who命令" class="headerlink" title="who命令"></a>who命令</h2><p>who命令显示目前登入系统的用户信息</p>
+<img src="/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/1.png" class>
+
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ol>
+<li><p>Ctrl+a：将光标移动到命令行的开始处</p>
+</li>
+<li><p>Ctrl+e：将光标移动到命行令的结尾处。</p>
+</li>
+<li><p>Ctrl+c：这个键可不是用来复制的，在终端中，按下Ctrl+C就代表结束当前终端执行的程序，按下的时候一定要慎重。</p>
+</li>
+<li><p>Ctrl+d：</p>
+<p>（1）表示键盘输入结束（EOF、End Of File、End Of Input）；</p>
+<p>（2）在命令行终端中，按Ctrl+D退出终端，相当于输入exit。</p>
+</li>
+<li><p>Ctrl+z：挂起一个进程</p>
+</li>
+</ol>
+<h2 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h2><p>linux shell下常用输入输出操作符</p>
+<ol>
+<li>标准输入  (stdin) ：代码为 0 ，使用 &lt; 或 &lt;&lt;</li>
+<li>标准输出  (stdout)：代码为 1 ，使用 &gt; 或 &gt;&gt;</li>
+<li>标准错误输出 (stderr)：代码为 2 ，使用 2&gt; 或 2&gt;&gt;</li>
+</ol>
+<p>重定向的符号意义</p>
+<ol>
+<li><code>&gt;</code>和<code>&lt;</code> 分别代表重定向的方向，是从左到右还是从右到左 </li>
+<li><code>&gt;&gt;</code>和 <code>&lt;&lt;</code> 代表追加，也就是不改变重定向目标文件原有的内容，追加在后面。</li>
+</ol>
+<p><strong>重定向</strong></p>
+<ol>
+<li>command &lt; filename     把command命令以filename文件作为标准输入</li>
+<li>command &gt; filename     把标准输出重定向到一个新文件中</li>
+<li>command &gt;&gt; filename    把标准输出重定向到一个文件中(追加)</li>
+<li> command 2&gt; filename    把标准错误输出重定向到一个文件中</li>
+<li>command 2&gt;&gt; filename   把标准错误输出重定向到一个文件中(追加)</li>
+<li>command &gt;&amp;m          把标准输出和标准错误输出重定向到文件描述符m中</li>
+</ol>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>通过符号“|”来标识，它用于连接两个命令的输入输出，即前一个命令的输出重定向到后一个命令的输入。</p>
+<img src="/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/2.png" class>
+
+<p>command1正确输出，作为command2的输入。然后comand2的输出作为，comand3的输入 ，comand3输出就会直接显示在屏幕上面了。</p>
+<p>通过管道之后：comand1,comand2的正确输出不显示在屏幕上面</p>
+<p><strong>注：</strong></p>
+<p>（1）管道命令只处理前一个命令正确输出，不处理错误输出</p>
+<p>（2）管道命令右边命令，必须能够接收标准输入流命令才行。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="/img/pic8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"><img class="next-cover" src="/img/pic8.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">信息收集之搜索引擎</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/08/03/Linux常用命令（Ubuntu）/" title="Linux常用命令（Ubuntu）"><img class="cover" src="/img/pic8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-03</div><div class="title">Linux常用命令（Ubuntu）</div></div></a></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">GeJian</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%B3%A8%E9%94%80"><span class="toc-number">1.1.</span> <span class="toc-text">命令行注销</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%85%B3%E6%9C%BA"><span class="toc-number">1.2.</span> <span class="toc-text">命令行关机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwd%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">pwd命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ls%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.</span> <span class="toc-text">ls命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cat%E5%91%BD%E4%BB%A4"><span class="toc-number">1.5.</span> <span class="toc-text">cat命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#who%E5%91%BD%E4%BB%A4"><span class="toc-number">1.6.</span> <span class="toc-text">who命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.7.</span> <span class="toc-text">快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.8.</span> <span class="toc-text">输入输出重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E9%81%93"><span class="toc-number">1.9.</span> <span class="toc-text">管道</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/" title="Linux常用命令（CentOS6.7）"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用命令（CentOS6.7）"/></a><div class="content"><a class="title" href="/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/" title="Linux常用命令（CentOS6.7）">Linux常用命令（CentOS6.7）</a><time datetime="2021-09-09T06:15:32.000Z" title="发表于 2021-09-09 14:15:32">2021-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" title="信息收集之搜索引擎"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信息收集之搜索引擎"/></a><div class="content"><a class="title" href="/2021/09/02/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8B%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" title="信息收集之搜索引擎">信息收集之搜索引擎</a><time datetime="2021-09-02T06:57:53.000Z" title="发表于 2021-09-02 14:57:53">2021-09-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/28/Java%E5%9F%BA%E7%A1%80/" title="Java基础"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础"/></a><div class="content"><a class="title" href="/2021/08/28/Java%E5%9F%BA%E7%A1%80/" title="Java基础">Java基础</a><time datetime="2021-08-28T15:13:26.000Z" title="发表于 2021-08-28 23:13:26">2021-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/10/Markdown/" title="Markdown"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Markdown"/></a><div class="content"><a class="title" href="/2021/08/10/Markdown/" title="Markdown">Markdown</a><time datetime="2021-08-10T14:20:37.000Z" title="发表于 2021-08-10 22:20:37">2021-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/03/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88Ubuntu%EF%BC%89/" title="Linux常用命令（Ubuntu）"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用命令（Ubuntu）"/></a><div class="content"><a class="title" href="/2021/08/03/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88Ubuntu%EF%BC%89/" title="Linux常用命令（Ubuntu）">Linux常用命令（Ubuntu）</a><time datetime="2021-08-03T13:41:54.000Z" title="发表于 2021-08-03 21:41:54">2021-08-03</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/pic5.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By GeJian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
