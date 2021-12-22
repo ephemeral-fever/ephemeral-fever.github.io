@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>并查集 | Ephemeral-fever</title><meta name="keywords" content="图论"><meta name="author" content="GeJian"><meta name="copyright" content="GeJian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="概述定义：        并查集是一种树型的数据结构，用于处理一些不相交集合的合并及查询问题（即所谓的并、查）。比如说，我们可以用并查集来判断一个森林中有几棵树、某个节点是否属于某棵树等。 主要构成：        并查集主要由一个整型数组pre[ ]和两个函数find( )、join( )构成。        数组 pre[ ] 记录了每个点的前驱节点是谁，函数 find(x) 用于查找指定节点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并查集">
+<meta property="og:url" content="http://example.com/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="概述定义：        并查集是一种树型的数据结构，用于处理一些不相交集合的合并及查询问题（即所谓的并、查）。比如说，我们可以用并查集来判断一个森林中有几棵树、某个节点是否属于某棵树等。 主要构成：        并查集主要由一个整型数组pre[ ]和两个函数find( )、join( )构成。        数组 pre[ ] 记录了每个点的前驱节点是谁，函数 find(x) 用于查找指定节点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic8.jpg">
+<meta property="article:published_time" content="2021-12-22T13:05:23.000Z">
+<meta property="article:modified_time" content="2021-12-22T15:12:13.721Z">
+<meta property="article:author" content="GeJian">
+<meta property="article:tag" content="图论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-22 23:12:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic8.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">并查集</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-22T13:05:23.000Z" title="发表于 2021-12-22 21:05:23">2021-12-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-22T15:12:13.721Z" title="更新于 2021-12-22 23:12:13">2021-12-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">基础算法</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>定义：</strong><br>        并查集是一种树型的数据结构，用于处理一些不相交集合的合并及查询问题（即所谓的并、查）。比如说，我们可以用并查集来判断一个森林中有几棵树、某个节点是否属于某棵树等。</p>
+<p><strong>主要构成：</strong><br>        并查集主要由一个整型数组pre[ ]和两个函数find( )、join( )构成。<br>        数组 pre[ ] 记录了每个点的前驱节点是谁，函数 find(x) 用于查找指定节点 x 属于哪个集合，函数 join(x,y) 用于合并两个节点 x 和 y 。</p>
+<p><strong>作用：</strong><br>        并查集的主要作用是求连通分支数。如果一个图中所有点都存在可达关系（直接或间接相连），则此图的连通分支数为1；如果此图有两大子图各自全部可达，则此图的连通分支数为2……</p>
+<p>下面给出洛谷上的模板题：</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3367">P3367 【模板】并查集 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<h1 id="find-函数的定义与实现"><a href="#find-函数的定义与实现" class="headerlink" title="find( )函数的定义与实现"></a>find( )函数的定义与实现</h1><p>​        首先我们需要定义一个数组：<code>int pre[1000]; </code>（数组长度依题意而定）。这个数组记录了每个节点的父节点是谁。节点从0或1开始编号（依题意而定）。比如说<code>pre[16]=6</code>就表示16号节点的父节点是6号。如果一个节点的父节点就是他自己，那说明他就是根节点了，查找到此结束。也有孤家寡人自成一派的，即单独一个点，那么他的父节点就是他自己。<br>​        pre数组只记录了每个节点的父节点，要想知道某个节点的祖宗节点（所在树的根节点），只能一级级查上去。因此你可以视find(x)这个函数就是找根节点用的。<br>​    下面给出这个函数的具体实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">//查找节点x所在树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre[x] == x)</span><br><span class="line">        <span class="comment">//约定根节点的前驱还是自己，所以x的父节点和自己相同时即可返回</span></span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> find(pre[x]); <span class="comment">//小递归</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    等同于：</span></span><br><span class="line"><span class="comment">    while(pre[x]!=x)</span></span><br><span class="line"><span class="comment">        x=pre[x]</span></span><br><span class="line"><span class="comment">    return x;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="join-函数的定义与实现"><a href="#join-函数的定义与实现" class="headerlink" title="join( )函数的定义与实现"></a>join( )函数的定义与实现</h1><p>​        如果两个集合要合并，要如何实现？要改动多少地方？其实很简单，将其中一个树挂到另一个树的根节点下即可，也就是将其中一个树的根节点的前驱设为另一个树的根节点，两个树的内部结构其实并不需要改变。join()函数的作用就是用来实现这个的。</p>
+<p>join(x,y)的执行逻辑如下：</p>
+<ol>
+<li>寻找 x 的所在树的根节点；</li>
+<li>寻找 y 的所在树的根节点；</li>
+<li>如果 x 和 y 不相等，则随便选一个树的根节点作为另一个树的根节点的父节点，如此一来就完成了 x 和 y 的合并。</li>
+</ol>
+<p>下面给出这个函数的具体实现：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//查找x和y的根节点</span></span><br><span class="line">    <span class="keyword">int</span> fx = find(x), fy = find(y);</span><br><span class="line">    <span class="comment">//如果根节点不同，即处于不同的树，将fx的父节点设为fy，即将x所在子树加到y所在树的根节点下</span></span><br><span class="line">    <span class="keyword">if</span> (fx != fy)</span><br><span class="line">        pre[fx] = fy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="路径压缩算法之一（优化find-函数）"><a href="#路径压缩算法之一（优化find-函数）" class="headerlink" title="路径压缩算法之一（优化find( )函数）"></a>路径压缩算法之一（优化find( )函数）</h1><p><strong>问题引入：</strong><br>        前面介绍的 join(x,y) 实际上为我们提供了一个将不同节点进行合并的方法。通常情况下，我们可以结合着循环来将给定的大量数据合并成为若干个更大的集合（即并查集）。但是问题也随之产生，我们来看这段代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(fx != fy)  </span><br><span class="line">	pre[fx]=fy;</span><br></pre></td></tr></table></figure>
+
+<p>​        这里并没有明确谁是谁的前驱的规则，而是我直接指定后面的数据作为前面数据的前驱。那么这样就导致了最终的树状结构无法预计，即有可能是良好的 n 叉树，也有可能是单支树结构（一字长蛇形）。试想，如果最后真的形成单支树结构，那么它的效率就会及其低下（树的深度过深，那么查询过程就必然耗时）。<br>而我们最理想的情况就是所有人的直接上级都是根节点，这样一来整个树的结构就只有两级，此时查询根节点只需要一次。因此，这就产生了路径压缩算法。</p>
+<p><strong>实现：</strong><br>        从上面的查询过程中不难看出，当从某个节点出发去寻找它的根节点时，我们会途径一系列的节点，在这些节点中，除了根节点外，其余所有节点都需要更改直接前驱为根节点。<br>        因此，基于这样的思路，我们可以通过递归的方法来逐层修改返回时的某个节点的直接前驱（即<code>pre[x]</code>的值）。简单说来就是将x到根节点路径上的所有点的pre（上级）都设为根节点。下面给出具体的实现代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre[x] == x)</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> pre[x] = find(pre[x]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        该算法存在一个缺陷：只有当查找了某个节点的代表元后，才能对该查找路径上的各节点进行路径压缩。换言之，第一次执行查找操作的时候是实现没有压缩效果的，只有在之后才有效。</p>
+<h1 id="路径压缩算法之二（加权标记法）"><a href="#路径压缩算法之二（加权标记法）" class="headerlink" title="路径压缩算法之二（加权标记法）"></a>路径压缩算法之二（加权标记法）</h1><p><strong>备注：</strong><br>        其实它也是属于路径压缩算法，不同的是其思想更加高级（更不容易想到）罢了。</p>
+<p><strong>主要思路：</strong><br>        加权标记法需要将树中所有节点都增设一个权值，用以表示该节点所在树中的高度（比如用rank[x]=3表示 x 节点所在树的高度为3）。这样一来，在合并操作的时候就能通过这个权值的大小来决定谁当谁的上级。<br>        在合并操作的时候，假设需要合并的两个集合的代表元分别为 x 和 y，则只需要令<code>pre[x] = y </code>或者<code>pre[y] = x </code>即可。但我们为了使合并后的树不产生退化（即：使树中左右子树的深度差尽可能小），那么对于每一个元素 x ，增设一个rank[x]数组，用以表达子树 x 的高度。在合并时，如果<code>rank[x] &lt; rank[y]</code>，则令<code>pre[x] = y</code>；否则令<code>pre[y] = x</code>。</p>
+<p>​        举个例子，我们对以A，F为代表元的集合进行合并操作（如下图所示）：</p>
+<img src="/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/1.png" class>
+
+<p>​        由于rank(A) &gt; rank(F) ，因此令pre[F]= A。合并后的图形如下图所示：</p>
+<img src="/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/2.png" class>
+
+<p>​        可以看出，合并前两个树的最大高度为3，合并后依然是3，这也就达到了我们的目的。但如果令pre[A]= F，那么就会使得合并后的树的总高度增加。</p>
+<p>​        我们常说，鱼和熊掌不可兼得，同理，时间复杂度和空间复杂度也很难兼得。由于给每个节点都增加了一个权值来标记其在树中的高度，这也就意味着需要额外的数据结构来存放权重信息，所以这将导致额外的空间开销。</p>
+<p><strong>实现：</strong><br>加权标记法的核心在于对rank数组的逻辑控制，其主要的情况有：</p>
+<ol>
+<li>如果rank[x] &lt; rank[y]，则令pre[x] = y；</li>
+<li>如果rank[x] == rank[y]，则可任意指定上级；</li>
+<li>如果rank[x] &gt; rank[y]，则令pre[y] = x；</li>
+</ol>
+<p>​        在实际写代码时，为了使代码尽可能简洁，我们可以将第1点单独作为一个逻辑选择，然后将2、3点作为另一个选择（反正第2点任意指定上级嘛），所以具体的代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x = find(x); <span class="comment">//寻找 x的代表元</span></span><br><span class="line">    y = find(y); <span class="comment">//寻找 y的代表元</span></span><br><span class="line">    <span class="keyword">if</span> (x == y)  <span class="comment">//如果 x和 y的代表元一致，说明他们共属同一集合，则不需要合并，直接返回；否则，执行下面的逻辑</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (height[x] &gt; height[y]) <span class="comment">//如果 x的高度大于 y，则令 y的上级为 x</span></span><br><span class="line">        pre[y] = x;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (height[x] == height[y]) <span class="comment">//如果 x的高度和 y的高度相同，则令 y的高度加1</span></span><br><span class="line">            height[y]++;</span><br><span class="line">        pre[x] = y; <span class="comment">//让 x的上级为 y</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>1、用集合中的某个元素来代表这个集合，则该元素称为此集合的代表元；<br>2 、一个集合内的所有元素组织成以代表元为根的树形结构；<br>3 、对于每一个元素 x，pre[x] 存放 x 在树形结构中的父亲节点（如果 x 是根节点，则令pre[x] = x）；<br>4 、对于查找操作，假设需要确定 x 所在的的集合，也就是确定集合的代表元。可以沿着pre[x]不断在树形结构中向上移动，直到到达根节点。</p>
+<p>因此，基于这样的特性，并查集的主要用途有以下两点：</p>
+<ol>
+<li>维护无向图的连通性（判断两个点是否在同一连通块内，或增加一条边后是否会产生环）；</li>
+<li>用在求解最小生成树的Kruskal算法里。</li>
+</ol>
+<p>一般来说，一个并查集对应三个操作：</p>
+<ol>
+<li>初始化（ Init()函数 ）</li>
+<li>查找函数（ Find()函数 ）</li>
+<li>合并集合函数（ Join()函数 ）</li>
+</ol>
+<p>下面给出代码汇总：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">题目描述</span></span><br><span class="line"><span class="comment">如题，现在有一个并查集，你需要完成合并和查询操作。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入格式</span></span><br><span class="line"><span class="comment">第一行包含两个整数 N,M,表示共有 N 个元素和 M 个操作。</span></span><br><span class="line"><span class="comment">接下来 M 行，每行包含三个整数 Z_i,X_i,Y_i。</span></span><br><span class="line"><span class="comment">当 Z_i=1时，将 X_i与 Y_i所在的集合合并。</span></span><br><span class="line"><span class="comment">当 Z_i=2时，输出 X_i与 Y_i是否在同一集合内，是的输出 Y ；否则输出 N 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输出格式</span></span><br><span class="line"><span class="comment">对于每一个 Z_i=2的操作，都有一行输出，每行包含一个大写字母，为 Y 或者 N 。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">输入输出样例</span></span><br><span class="line"><span class="comment">输入</span></span><br><span class="line"><span class="comment">4 7</span></span><br><span class="line"><span class="comment">2 1 2</span></span><br><span class="line"><span class="comment">1 1 2</span></span><br><span class="line"><span class="comment">2 1 2</span></span><br><span class="line"><span class="comment">1 3 4</span></span><br><span class="line"><span class="comment">2 1 4</span></span><br><span class="line"><span class="comment">1 2 3</span></span><br><span class="line"><span class="comment">2 1 4</span></span><br><span class="line"><span class="comment">输出</span></span><br><span class="line"><span class="comment">N</span></span><br><span class="line"><span class="comment">Y</span></span><br><span class="line"><span class="comment">N</span></span><br><span class="line"><span class="comment">Y</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10001</span>;</span><br><span class="line"><span class="keyword">int</span> pre[maxn]; <span class="comment">//保存每个节点的前驱</span></span><br><span class="line"><span class="keyword">int</span> height[maxn]; <span class="comment">//保存每个节点所在树的高度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//初始化操作</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        pre[i] = i;</span><br><span class="line">        height[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">//查找节点x所在树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre[x] == x)</span><br><span class="line">        <span class="comment">//约定根节点的前驱还是自己，所以x的父节点和自己相同时即可返回</span></span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> find(pre[x]); <span class="comment">//小递归</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    等同于：</span></span><br><span class="line"><span class="comment">    while(pre[x]!=x)</span></span><br><span class="line"><span class="comment">        x=pre[x]</span></span><br><span class="line"><span class="comment">    return x;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findpro</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//利用路径压缩进行优化</span></span><br><span class="line">    <span class="keyword">if</span> (pre[x] == x)</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> pre[x] = findpro(pre[x]); <span class="comment">//赋值语句的返回值为右值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">join</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//查找x和y的根节点</span></span><br><span class="line">    <span class="keyword">int</span> fx = findpro(x), fy = findpro(y);</span><br><span class="line">    <span class="comment">//如果根节点不同，即处于不同的树，将fx的父节点设为fy，即将x所在子树加到y所在树的根节点下</span></span><br><span class="line">    <span class="keyword">if</span> (fx != fy)</span><br><span class="line">        pre[fx] = fy;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">joinpro</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span><span class="comment">//加权标记法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x = find(x); <span class="comment">//寻找 x的代表元</span></span><br><span class="line">    y = find(y); <span class="comment">//寻找 y的代表元</span></span><br><span class="line">    <span class="keyword">if</span> (x == y)  <span class="comment">//如果 x和 y的代表元一致，说明他们共属同一集合，则不需要合并，直接返回；否则，执行下面的逻辑</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (height[x] &gt; height[y]) <span class="comment">//如果 x的高度大于 y，则令 y的上级为 x</span></span><br><span class="line">        pre[y] = x;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (height[x] == height[y]) <span class="comment">//如果 x的高度和 y的高度相同，则令 y的高度加1</span></span><br><span class="line">            height[y]++;</span><br><span class="line">        pre[x] = y; <span class="comment">//让 x的上级为 y</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    init(n);</span><br><span class="line">    <span class="keyword">while</span> (m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> z, x, y;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; z &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        <span class="keyword">if</span> (z == <span class="number">1</span>)</span><br><span class="line">            join(x, y);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (findpro(x) == findpro(y))</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Y&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;N&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>本篇博客基于以下博客进行了简化，并加入了自己的理解：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/the_ZED/article/details/105126583?ops_request_misc=%7B%22request_id%22:%22164017515116780255278625%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=164017515116780255278625&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105126583.first_rank_v2_pc_rank_v29&utm_term=%E5%B9%B6%E6%9F%A5%E9%9B%86&spm=1018.2226.3001.4187">【算法与数据结构】—— 并查集_the_ZED的博客-CSDN博客_并查集</a></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a></div><div class="post_share"><div class="social-share" data-image="/img/pic8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/12/11/heapq%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><img class="next-cover" src="/img/pic6.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">heapq模块基本使用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/12/10/Dijkstra算法/" title="Dijkstra算法"><img class="cover" src="/img/pic3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-10</div><div class="title">Dijkstra算法</div></div></a></div></div></div><hr/><div id="post-comment"></div><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">GeJian</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#find-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">find( )函数的定义与实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#join-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">join( )函数的定义与实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E4%B9%8B%E4%B8%80%EF%BC%88%E4%BC%98%E5%8C%96find-%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">路径压缩算法之一（优化find( )函数）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%EF%BC%88%E5%8A%A0%E6%9D%83%E6%A0%87%E8%AE%B0%E6%B3%95%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">路径压缩算法之二（加权标记法）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="并查集"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="并查集"/></a><div class="content"><a class="title" href="/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="并查集">并查集</a><time datetime="2021-12-22T13:05:23.000Z" title="发表于 2021-12-22 21:05:23">2021-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/11/heapq%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="heapq模块基本使用"><img src="/img/pic6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="heapq模块基本使用"/></a><div class="content"><a class="title" href="/2021/12/11/heapq%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="heapq模块基本使用">heapq模块基本使用</a><time datetime="2021-12-11T13:24:04.000Z" title="发表于 2021-12-11 21:24:04">2021-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/11/queue%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="queue模块基本使用"><img src="/img/pic10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="queue模块基本使用"/></a><div class="content"><a class="title" href="/2021/12/11/queue%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="queue模块基本使用">queue模块基本使用</a><time datetime="2021-12-11T09:28:09.000Z" title="发表于 2021-12-11 17:28:09">2021-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/10/Dijkstra%E7%AE%97%E6%B3%95/" title="Dijkstra算法"><img src="/img/pic3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Dijkstra算法"/></a><div class="content"><a class="title" href="/2021/12/10/Dijkstra%E7%AE%97%E6%B3%95/" title="Dijkstra算法">Dijkstra算法</a><time datetime="2021-12-10T13:49:36.000Z" title="发表于 2021-12-10 21:49:36">2021-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/" title="Linux常用命令（CentOS6.7）"><img src="/img/pic6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用命令（CentOS6.7）"/></a><div class="content"><a class="title" href="/2021/09/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88CentOS6.7%EF%BC%89/" title="Linux常用命令（CentOS6.7）">Linux常用命令（CentOS6.7）</a><time datetime="2021-09-09T06:15:32.000Z" title="发表于 2021-09-09 14:15:32">2021-09-09</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/pic5.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By GeJian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'NeetcaPT6I5lGh1te9TiWKEF-gzGzoHsz# leancloud application app id',
+      appKey: 'P8QDO89nJsjuHaRAhCQwkt9b# leancloud application app key',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zn-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
