@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>长安“战疫”网络安全卫士守护赛crypto | Ephemeral-fever</title><meta name="keywords" content="wp"><meta name="author" content="Ephemeral-fever"><meta name="copyright" content="Ephemeral-fever"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="cry1题目如下，就是一个脚本： from Crypto.Util.number import*from secret import flag,keyassert len(key) &lt;&#x3D; 5assert flag[:5] &#x3D;&#x3D; b&amp;#x27;cazy&amp;#123;&amp;#x27;def can_encrypt(flag,key):    block_len &#x3D; len(flag) &#x2F;&#x2F; len(k">
+<meta property="og:type" content="article">
+<meta property="og:title" content="长安“战疫”网络安全卫士守护赛crypto">
+<meta property="og:url" content="http://example.com/2022/01/09/%E9%95%BF%E5%AE%89%E2%80%9C%E6%88%98%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%AB%E5%A3%AB%E5%AE%88%E6%8A%A4%E8%B5%9Bcrypto/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="cry1题目如下，就是一个脚本： from Crypto.Util.number import*from secret import flag,keyassert len(key) &lt;&#x3D; 5assert flag[:5] &#x3D;&#x3D; b&amp;#x27;cazy&amp;#123;&amp;#x27;def can_encrypt(flag,key):    block_len &#x3D; len(flag) &#x2F;&#x2F; len(k">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic15.jpg">
+<meta property="article:published_time" content="2022-01-09T13:19:42.000Z">
+<meta property="article:modified_time" content="2022-01-10T02:47:09.790Z">
+<meta property="article:author" content="Ephemeral-fever">
+<meta property="article:tag" content="wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic15.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/01/09/%E9%95%BF%E5%AE%89%E2%80%9C%E6%88%98%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%AB%E5%A3%AB%E5%AE%88%E6%8A%A4%E8%B5%9Bcrypto/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-10 10:47:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic15.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">长安“战疫”网络安全卫士守护赛crypto</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-09T13:19:42.000Z" title="发表于 2022-01-09 21:19:42">2022-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-10T02:47:09.790Z" title="更新于 2022-01-10 10:47:09">2022-01-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AF%86%E7%A0%81/">密码</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="cry1"><a href="#cry1" class="headerlink" title="cry1"></a>cry1</h1><p>题目如下，就是一个脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag,key</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">len</span>(key) &lt;= <span class="number">5</span></span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">5</span>] == <span class="string">b&#x27;cazy&#123;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">can_encrypt</span>(<span class="params">flag,key</span>):</span></span><br><span class="line">    block_len = <span class="built_in">len</span>(flag) // <span class="built_in">len</span>(key) + <span class="number">1</span></span><br><span class="line">    new_key = key * block_len</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">bytes</span>([i^j <span class="keyword">for</span> i,j <span class="keyword">in</span> <span class="built_in">zip</span>(flag,new_key)])</span><br><span class="line"></span><br><span class="line">c = can_encrypt(flag,key)</span><br><span class="line">print(c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># b&#x27;&lt;pH\x86\x1a&amp;&quot;m\xce\x12\x00pm\x97U1uA\xcf\x0c:NP\xcf\x18~l&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>zip()</strong> 函数用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的列表。</p>
+<p>如果各个迭代器的元素个数不一致，则返回列表长度与最短的对象相同，利用 * 号操作符，可以将元组解压为列表。</p>
+</blockquote>
+<p>这道题就是一个简单的异或，从can_encrypt()函数中能看出来flag的每一位都和密钥进行了异或，只要再异或回去即可得到flag，即从a^b=c还原a，a=b^c</p>
+<p>提示里给出了flag的前5位，并且密钥的长度小于等于5，再根据密文的前5位，将他们异或，即可得到密钥</p>
+<p>根据密文的长度27，密钥的长度5还原出block_len为6</p>
+<p>解题脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"><span class="comment">#from secret import flag,key</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#assert len(key) &lt;= 5</span></span><br><span class="line"><span class="comment">#assert flag[:5] == b&#x27;cazy&#123;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">can_encrypt</span>(<span class="params">flag,key</span>):</span></span><br><span class="line">    block_len = <span class="built_in">len</span>(flag) // <span class="built_in">len</span>(key) + <span class="number">1</span></span><br><span class="line">    new_key = key * block_len</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">bytes</span>([i^j <span class="keyword">for</span> i,j <span class="keyword">in</span> <span class="built_in">zip</span>(flag,new_key)])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c=<span class="string">b&#x27;&lt;pH\x86\x1a&amp;&quot;m\xce\x12\x00pm\x97U1uA\xcf\x0c:NP\xcf\x18~l&#x27;</span></span><br><span class="line">clue=<span class="string">&#x27;cazy&#123;&#x27;</span></span><br><span class="line">key=[]</span><br><span class="line">flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    key.append(<span class="built_in">ord</span>(clue[i])^c[i])</span><br><span class="line">key=key*<span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">27</span>):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(c[i]^key[i])</span><br><span class="line">print(flag)</span><br><span class="line"><span class="comment">#cazy&#123;y3_1s_a_h4nds0me_b0y!&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="cry2"><a href="#cry2" class="headerlink" title="cry2"></a>cry2</h1><p>题目如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">5</span>] ==<span class="string">b&#x27;cazy&#123;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pad</span>(<span class="params">m</span>):</span></span><br><span class="line">    tmp = <span class="number">16</span>-(<span class="built_in">len</span>(m)%<span class="number">16</span>)</span><br><span class="line">    <span class="keyword">return</span> m + <span class="built_in">bytes</span>([tmp <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(tmp)])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span>(<span class="params">m,key</span>):</span></span><br><span class="line">    aes = AES.new(key,AES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> aes.encrypt(m)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    flag = pad(flag)</span><br><span class="line">    key = pad(long_to_bytes(random.randrange(<span class="number">1</span>,<span class="number">1</span>&lt;&lt;<span class="number">20</span>)))</span><br><span class="line">    c = encrypt(flag,key)</span><br><span class="line">    print(c)</span><br><span class="line"><span class="comment"># b&#x27;\x9d\x18K\x84n\xb8b|\x18\xad4\xc6\xfc\xec\xfe\x14\x0b_T\xe3\x1b\x03Q\x96e\x9e\xb8MQ\xd5\xc3\x1c&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>先理解题目意思，pad函数将m的长度补成16的整数倍，encrypt函数调用了aes加密。算一下1&lt;&lt;20为1048576不是很大，可以爆破，同样调用库里的aes解密函数即可，通过前5位来判断是否为目的flag。</p>
+<p>解题脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="comment">#from secret import flag</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#assert flag[:5] ==b&#x27;cazy&#123;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pad</span>(<span class="params">m</span>):</span></span><br><span class="line">    tmp = <span class="number">16</span>-(<span class="built_in">len</span>(m)%<span class="number">16</span>)</span><br><span class="line">    <span class="keyword">return</span> m + <span class="built_in">bytes</span>([tmp <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(tmp)])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encrypt</span>(<span class="params">m,key</span>):</span></span><br><span class="line">    aes = AES.new(key,AES.MODE_ECB)</span><br><span class="line">    <span class="keyword">return</span> aes.encrypt(m)</span><br><span class="line"></span><br><span class="line">c=<span class="string">b&#x27;\x9d\x18K\x84n\xb8b|\x18\xad4\xc6\xfc\xec\xfe\x14\x0b_T\xe3\x1b\x03Q\x96e\x9e\xb8MQ\xd5\xc3\x1c&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>&lt;&lt;<span class="number">20</span>):</span><br><span class="line">    key = pad(long_to_bytes(i))</span><br><span class="line">    aes=AES.new(key,AES.MODE_ECB)</span><br><span class="line">    plain=aes.decrypt(c)</span><br><span class="line">    <span class="keyword">if</span> plain[:<span class="number">5</span>]==<span class="string">b&#x27;cazy&#123;&#x27;</span>:</span><br><span class="line">        print(plain)</span><br><span class="line"></span><br><span class="line"><span class="comment">#cazy&#123;n0_c4n,bb?n0p3!&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="cry3"><a href="#cry3" class="headerlink" title="cry3"></a>cry3</h1><p>题目如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">len</span>(flag) &lt;= <span class="number">80</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sec_encry</span>(<span class="params">m</span>):</span></span><br><span class="line">    cip = (m - (<span class="number">1</span>&lt;&lt;<span class="number">500</span>))**<span class="number">2</span> + <span class="number">0x0338470</span></span><br><span class="line">    <span class="keyword">return</span> cip</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    m = bytes_to_long(flag)</span><br><span class="line">    c = sec_encry(m)</span><br><span class="line">    print(c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 10715086071862673209484250490600018105614048117055336074437503883703510511248211671489145400471130049712947188505612184220711949974689275316345656079538583389095869818942817127245278601695124271626668045250476877726638182396614587807925457735428719972874944279172128411500209111406507112585996098530169</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>没啥好说的，按照他的操作逆过来就行</p>
+<p>有一点需要注意，python内置的函数用来开方精度不够，需要用gmpy2里的iroot函数：</p>
+<blockquote>
+<p>gmpy2.iroot(x,n)：x开n次根，返回两个参数，第一个为开方结果，第二个布尔参数，表示是否能开尽</p>
+</blockquote>
+<p>解题脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#from secret import flag</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#assert len(flag) &lt;= 80</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sec_encry</span>(<span class="params">m</span>):</span></span><br><span class="line">    cip = (m - (<span class="number">1</span>&lt;&lt;<span class="number">500</span>))**<span class="number">2</span> + <span class="number">0x0338470</span></span><br><span class="line">    <span class="keyword">return</span> cip</span><br><span class="line"></span><br><span class="line">c=<span class="number">10715086071862673209484250490600018105614048117055336074437503883703510511248211671489145400471130049712947188505612184220711949974689275316345656079538583389095869818942817127245278601695124271626668045250476877726638182396614587807925457735428719972874944279172128411500209111406507112585996098530169</span></span><br><span class="line">c-=<span class="number">0x0338470</span></span><br><span class="line"><span class="keyword">assert</span> iroot(c,<span class="number">2</span>)[<span class="number">1</span>]</span><br><span class="line">c=iroot(c,<span class="number">2</span>)[<span class="number">0</span>]</span><br><span class="line">m=<span class="number">-1</span>*c+(<span class="number">1</span>&lt;&lt;<span class="number">500</span>)</span><br><span class="line">print(long_to_bytes(m))</span><br><span class="line"><span class="comment">#cazy&#123;1234567890_no_m4th_n0_cRy&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="cry4"><a href="#cry4" class="headerlink" title="cry4"></a>cry4</h1><p>题目如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line"><span class="keyword">assert</span> flag[:<span class="number">5</span>] == <span class="string">b&#x27;cazy&#123;&#x27;</span></span><br><span class="line"><span class="keyword">assert</span> flag[<span class="number">-1</span>:] == <span class="string">b&#x27;&#125;&#x27;</span></span><br><span class="line">flag = flag[<span class="number">5</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">assert</span>(<span class="built_in">len</span>(flag) == <span class="number">24</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">my_LCG</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, seed1 , seed2</span>):</span></span><br><span class="line">        self.state = [seed1,seed2]</span><br><span class="line">        self.n = getPrime(<span class="number">64</span>)</span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            self.a = bytes_to_long(flag[:<span class="number">8</span>])</span><br><span class="line">            self.b = bytes_to_long(flag[<span class="number">8</span>:<span class="number">16</span>])</span><br><span class="line">            self.c = bytes_to_long(flag[<span class="number">16</span>:])</span><br><span class="line">            <span class="keyword">if</span> self.a &lt; self.n <span class="keyword">and</span> self.b &lt; self.n <span class="keyword">and</span> self.c &lt; self.n:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span>(<span class="params">self</span>):</span></span><br><span class="line">        new = (self.a * self.state[<span class="number">-1</span>] + self.b * self.state[<span class="number">-2</span>] + self.c) % self.n</span><br><span class="line">        self.state.append( new )</span><br><span class="line">        <span class="keyword">return</span> new</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    lcg = my_LCG(getRandomInteger(<span class="number">64</span>),getRandomInteger(<span class="number">64</span>))</span><br><span class="line">    print(<span class="string">&quot;data = &quot;</span> + <span class="built_in">str</span>([lcg.<span class="built_in">next</span>() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]))</span><br><span class="line">    print(<span class="string">&quot;n = &quot;</span> + <span class="built_in">str</span>(lcg.n))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main() </span><br><span class="line"></span><br><span class="line"><span class="comment"># data = [2626199569775466793, 8922951687182166500, 454458498974504742, 7289424376539417914, 8673638837300855396]</span></span><br><span class="line"><span class="comment"># n = 10104483468358610819</span></span><br></pre></td></tr></table></figure>
+<p>根据题目意思，flag被拆成了三部分，在next函数里线性递推，已知n和递推出来的五个new值，根据题目意思我们可以得到如下的同余式组：</p>
+<script type="math/tex; mode=display">\left\{\begin{array}{l}
+(a * \text { seed } 2+b * \text { seed } 1+c) \equiv \text { new } 1(\bmod n) \\
+(a * \text { new } 1+b * \text { seed } 2+c) \equiv \text { new } 2(\bmod n) \\
+(a * \text { new } 2+b * \text { new } 1+c) \equiv \text { new } 3(\bmod n) \\
+(a * \text { new } 3+b * \text { new } 2+c) \equiv \text { new } 4(\bmod n) \\
+(a * \text { new } 4+b * \text { new } 3+c) \equiv \text { new } 5(\bmod n)
+\end{array}\right.</script><p>由于seed2和seed1未知，我们只考虑下面三个方程，并且下面三个方程也只有三个未知数，由此断定方程有解。</p>
+<p>我们把方程组写成矩阵形式如下：</p>
+<script type="math/tex; mode=display">\left(\begin{array}{l}
+\text { new3 } \\
+\text { new4 } \\
+\text { new5 }
+\end{array}\right)=\left(\begin{array}{lll}
+\text { new2 } & \text { new1 } & 1 \\
+\text { new3 } & \text { new2 } & 1 \\
+\text { new4 } & \text { new3 } & 1
+\end{array}\right) *\left(\begin{array}{l}
+a \\
+b \\
+c
+\end{array}\right)</script><p>解出a，b，c如下：</p>
+<script type="math/tex; mode=display">\left(\begin{array}{l}
+a \\
+b \\
+c
+\end{array}\right)=\left(\begin{array}{lll}
+\text { new2 } & \text { new1 } & 1 \\
+\text { new3 } & \text { new2 } & 1 \\
+\text { new4 } & \text { new3 } & 1
+\end{array}\right)^{-1} *\left(\begin{array}{l}
+\text { new3 } \\
+\text { new4 } \\
+\text { new5 }
+\end{array}\right)</script><p>由于python的numpy精度不够，所以我们用sagemath，下面给出一点基本使用方法：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46161993/article/details/105163075"> SageMath矩阵操作及解线性方程组_m0_46161993的博客-CSDN博客_sagemath 矩阵</a></p>
+</blockquote>
+<p>解出a，b，c后写个脚本flag就出来了</p>
+<p>解题脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">data = [<span class="number">2626199569775466793</span>, <span class="number">8922951687182166500</span>,</span><br><span class="line">        <span class="number">454458498974504742</span>, <span class="number">7289424376539417914</span>, <span class="number">8673638837300855396</span>]</span><br><span class="line">n = <span class="number">10104483468358610819</span></span><br><span class="line">a,b,c=<span class="number">5490290802446982981</span>,<span class="number">8175498372211240502</span>,<span class="number">6859390560180138873</span></span><br><span class="line">flag=long_to_bytes(a)+long_to_bytes(b)+long_to_bytes(c)</span><br><span class="line">print(<span class="string">b&#x27;cazy&#123;&#x27;</span>+flag+<span class="string">b&#x27;&#125;&#x27;</span>)</span><br><span class="line"><span class="comment">#cazy&#123;L1near_Equ4t1on6_1s_34sy&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="cry5"><a href="#cry5" class="headerlink" title="cry5"></a>cry5</h1><p>题目如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pinvq:0x63367a2b947c21d5051144d2d40572e366e19e3539a3074a433a92161465543157854669134c03642a12d304d2d9036e6458fe4c850c772c19c4eb3f567902b3</span><br><span class="line">qinvp:0x79388eb6c541fffefc9cfb083f3662655651502d81ccc00ecde17a75f316bc97a8d888286f21b1235bde1f35efe13f8b3edb739c8f28e6e6043cb29569aa0e7b</span><br><span class="line">c:0x5a1e001edd22964dd501eac6071091027db7665e5355426e1fa0c6360accbc013c7a36da88797de1960a6e9f1cf9ad9b8fd837b76fea7e11eac30a898c7a8b6d8c8989db07c2d80b14487a167c0064442e1fb9fd657a519cac5651457d64223baa30d8b7689d22f5f3795659ba50fb808b1863b344d8a8753b60bb4188b5e386</span><br><span class="line">e:0x10005</span><br><span class="line">d:0xae285803302de933cfc181bd4b9ab2ae09d1991509cb165aa1650bef78a8b23548bb17175f10cddffcde1a1cf36417cc080a622a1f8c64deb6d16667851942375670c50c5a32796545784f0bbcfdf2c0629a3d4f8e1a8a683f2aa63971f8e126c2ef75e08f56d16e1ec492cf9d26e730eae4d1a3fecbbb5db81e74d5195f49f1</span><br></pre></td></tr></table></figure>
+<p>一看特征就知道考察rsa，出于简便，我们把pinvq记为x，qinvp记为y。其中pinvq是q关于q的逆元，qinvp是q关于p的逆元，由此得出以下同余式：</p>
+<script type="math/tex; mode=display">\left\{\begin{matrix}
+ p*x \equiv 1 \pmod{q} \\
+q*y \equiv 1 \pmod{p} 
+\end{matrix}\right.</script><p>将其改写成如下形式：</p>
+<script type="math/tex; mode=display">\left\{\begin{matrix}
+ k_{1}*q+1=p*x \\
+ k_{2}*p+1=q*y
+\end{matrix}\right.</script><p>将上面两式做差得：$p(k_{2}+x)=q(k_{1}+y)$</p>
+<p>由于p和q为素数，所以我们得到：</p>
+<script type="math/tex; mode=display">\left\{\begin{matrix}
+ p=k_{1}+y\\
+ q=k_{2}+x
+\end{matrix}\right.</script><p>将p和q代回上面 的$k_{1}<em>q+1=p</em>x$并化简得到</p>
+<script type="math/tex; mode=display">k_{1}k_{2}+1=xy</script><p>所以$k_{2}=\frac{xy-1}{k_{1}} $</p>
+<p>又由于$\phi (n)=(p-1)(q-1)=(k_{1}+y-1)(k_{2}+x-1)$</p>
+<p>将k2代入得$\phi(n)=(k_{1}+y-1)(\frac{xy-1}{k_{1}}+x-1 ) $</p>
+<p>为避免出现除法，我们写成如下形式：</p>
+<script type="math/tex; mode=display">k_{1}*\phi(n)=(k_{1}+y-1)(xy-1+k_{1}x-k_{1} )</script><p>由于$e<em>d \equiv 1 \pmod{\phi (n)} $，所以$e</em>d =k*\phi (n)+1$，所以</p>
+<script type="math/tex; mode=display">k=\frac{e*d-1}{\phi (n)} =e*\frac{d}{\phi (n)}-\frac{1}{\phi (n)}</script><p>注意到$d&lt; \phi (n)$，所以k是小于e的，而e给的并不大，所以我们可以枚举k</p>
+<p>通过$\phi (n)=\frac{e*d-1}{k} $求出$\phi (n)$，这样上面的方程只有一个未知数$k_{1}$了，利用python的z3库即可解方程</p>
+<p>z3基本使用如下：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://121.196.108.142/archives/48/">python z3库 - Hello World</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35713009/article/details/88743410"> Z3Py教程(翻译)_40KO的博客-CSDN博客_python z3</a></p>
+</blockquote>
+<p>解题脚本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">pinvq = <span class="number">0x63367a2b947c21d5051144d2d40572e366e19e3539a3074a433a92161465543157854669134c03642a12d304d2d9036e6458fe4c850c772c19c4eb3f567902b3</span></span><br><span class="line">qinvp = <span class="number">0x79388eb6c541fffefc9cfb083f3662655651502d81ccc00ecde17a75f316bc97a8d888286f21b1235bde1f35efe13f8b3edb739c8f28e6e6043cb29569aa0e7b</span></span><br><span class="line">c = <span class="number">0x5a1e001edd22964dd501eac6071091027db7665e5355426e1fa0c6360accbc013c7a36da88797de1960a6e9f1cf9ad9b8fd837b76fea7e11eac30a898c7a8b6d8c8989db07c2d80b14487a167c0064442e1fb9fd657a519cac5651457d64223baa30d8b7689d22f5f3795659ba50fb808b1863b344d8a8753b60bb4188b5e386</span></span><br><span class="line">e = <span class="number">0x10005</span></span><br><span class="line">d = <span class="number">0xae285803302de933cfc181bd4b9ab2ae09d1991509cb165aa1650bef78a8b23548bb17175f10cddffcde1a1cf36417cc080a622a1f8c64deb6d16667851942375670c50c5a32796545784f0bbcfdf2c0629a3d4f8e1a8a683f2aa63971f8e126c2ef75e08f56d16e1ec492cf9d26e730eae4d1a3fecbbb5db81e74d5195f49f1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,e):</span><br><span class="line">    phi=(e*d<span class="number">-1</span>)//k</span><br><span class="line">    <span class="keyword">if</span> (e*d<span class="number">-1</span>)%k!=<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">continue</span>        </span><br><span class="line">    <span class="keyword">if</span> e*d%phi!=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    x=Int(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">    s=Solver()</span><br><span class="line">    s.add(x*phi==(x+qinvp<span class="number">-1</span>)*(pinvq*qinvp<span class="number">-1</span>+x*(pinvq<span class="number">-1</span>)))</span><br><span class="line">    <span class="keyword">if</span> s.check()==sat:</span><br><span class="line">        print(s.model())</span><br><span class="line">        k1=<span class="built_in">int</span>(<span class="built_in">str</span>(s.model()[x]))</span><br><span class="line">        k2=(pinvq*qinvp<span class="number">-1</span>)//k1</span><br><span class="line">        p=k1+qinvp</span><br><span class="line">        q=k2+pinvq</span><br><span class="line">        print(long_to_bytes(<span class="built_in">pow</span>(c,d,p*q)))</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment">#flag&#123;c4617a206ba83d7f824dc44e5e67196a&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/wp/">wp</a></div><div class="post_share"><div class="social-share" data-image="/img/pic15.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/07/%E5%85%AC%E9%92%A5%E6%8F%90%E5%8F%96/"><img class="next-cover" src="/img/pic19.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">公钥提取</div></div></a></div></nav><hr/><div id="post-comment"></div><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Ephemeral-fever</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cry1"><span class="toc-number">1.</span> <span class="toc-text">cry1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cry2"><span class="toc-number">2.</span> <span class="toc-text">cry2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cry3"><span class="toc-number">3.</span> <span class="toc-text">cry3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cry4"><span class="toc-number">4.</span> <span class="toc-text">cry4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cry5"><span class="toc-number">5.</span> <span class="toc-text">cry5</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/01/09/%E9%95%BF%E5%AE%89%E2%80%9C%E6%88%98%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%AB%E5%A3%AB%E5%AE%88%E6%8A%A4%E8%B5%9Bcrypto/" title="长安“战疫”网络安全卫士守护赛crypto"><img src="/img/pic15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="长安“战疫”网络安全卫士守护赛crypto"/></a><div class="content"><a class="title" href="/2022/01/09/%E9%95%BF%E5%AE%89%E2%80%9C%E6%88%98%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%AB%E5%A3%AB%E5%AE%88%E6%8A%A4%E8%B5%9Bcrypto/" title="长安“战疫”网络安全卫士守护赛crypto">长安“战疫”网络安全卫士守护赛crypto</a><time datetime="2022-01-09T13:19:42.000Z" title="发表于 2022-01-09 21:19:42">2022-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/07/%E5%85%AC%E9%92%A5%E6%8F%90%E5%8F%96/" title="公钥提取"><img src="/img/pic19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="公钥提取"/></a><div class="content"><a class="title" href="/2022/01/07/%E5%85%AC%E9%92%A5%E6%8F%90%E5%8F%96/" title="公钥提取">公钥提取</a><time datetime="2022-01-07T08:36:14.000Z" title="发表于 2022-01-07 16:36:14">2022-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/07/dp%E6%B3%84%E9%9C%B2/" title="dp泄露"><img src="/img/pic12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="dp泄露"/></a><div class="content"><a class="title" href="/2022/01/07/dp%E6%B3%84%E9%9C%B2/" title="dp泄露">dp泄露</a><time datetime="2022-01-07T07:31:56.000Z" title="发表于 2022-01-07 15:31:56">2022-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/07/dp-dq%E6%B3%84%E9%9C%B2/" title="dp,dq泄露"><img src="/img/pic8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="dp,dq泄露"/></a><div class="content"><a class="title" href="/2022/01/07/dp-dq%E6%B3%84%E9%9C%B2/" title="dp,dq泄露">dp,dq泄露</a><time datetime="2022-01-07T06:39:08.000Z" title="发表于 2022-01-07 14:39:08">2022-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/05/KMP%E7%AE%97%E6%B3%95/" title="KMP算法"><img src="/img/pic1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="KMP算法"/></a><div class="content"><a class="title" href="/2022/01/05/KMP%E7%AE%97%E6%B3%95/" title="KMP算法">KMP算法</a><time datetime="2022-01-05T07:18:40.000Z" title="发表于 2022-01-05 15:18:40">2022-01-05</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Ephemeral-fever</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'NeetcaPT6I5lGh1te9TiWKEF-gzGzoHsz# leancloud application app id',
+      appKey: 'P8QDO89nJsjuHaRAhCQwkt9b# leancloud application app key',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zn-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
