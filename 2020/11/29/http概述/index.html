@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>http概述 | Ephemeral-fever</title><meta name="author" content="Ephemeral-fever"><meta name="copyright" content="Ephemeral-fever"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="一、Web页面生成原理​        当我们在浏览器的地址栏中输入网址，然后点击回车，接着，浏览器就会呈现出我们需要的web界面，那么，这个界面是怎么产生的？web的界面是根据我们输入的URL（网址、地址），浏览器从服务器端获取对应的文件资源等信息，然后显示在浏览器上面。像这种通过发送请求获取服务器资源的web浏览器等，都可以称之为客户端（client）。 ​        Web 使用一种名为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http概述">
+<meta property="og:url" content="http://example.com/2020/11/29/http%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="一、Web页面生成原理​        当我们在浏览器的地址栏中输入网址，然后点击回车，接着，浏览器就会呈现出我们需要的web界面，那么，这个界面是怎么产生的？web的界面是根据我们输入的URL（网址、地址），浏览器从服务器端获取对应的文件资源等信息，然后显示在浏览器上面。像这种通过发送请求获取服务器资源的web浏览器等，都可以称之为客户端（client）。 ​        Web 使用一种名为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic13.jpg">
+<meta property="article:published_time" content="2020-11-29T04:40:56.000Z">
+<meta property="article:modified_time" content="2022-01-11T12:17:30.108Z">
+<meta property="article:author" content="Ephemeral-fever">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic13.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/11/29/http%E6%A6%82%E8%BF%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-11 20:17:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic13.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">http概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-29T04:40:56.000Z" title="发表于 2020-11-29 12:40:56">2020-11-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-11T12:17:30.108Z" title="更新于 2022-01-11 20:17:30">2022-01-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/notes/">notes</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、Web页面生成原理"><a href="#一、Web页面生成原理" class="headerlink" title="一、Web页面生成原理"></a>一、Web页面生成原理</h1><p>​        当我们在浏览器的地址栏中输入网址，然后点击回车，接着，浏览器就会呈现出我们需要的web界面，那么，这个界面是怎么产生的？web的界面是根据我们输入的URL（网址、地址），浏览器从服务器端获取对应的文件资源等信息，然后显示在浏览器上面。像这种通过发送请求获取服务器资源的web浏览器等，都可以称之为客户端（client）。</p>
+<p>​        Web 使用一种名为 HTTP（HyperText Transfer Protocol）的协议作为规范，完成从客户端到服务器端等一系列运作流程。而协议是指规则的约定。可以说，Web 是建立在 HTTP 协议上通信的。</p>
+<p>​        HTTP使用的是可靠的数据传输协议，因此即使数据来自地球的另一端，它也能确保数据在传输的过程中不会被损坏或产生混乱，用户在访问信息的时候不用担心其完整性。</p>
+<h1 id="二、Web资源"><a href="#二、Web资源" class="headerlink" title="二、Web资源"></a>二、Web资源</h1><h2 id="1、MIME类型"><a href="#1、MIME类型" class="headerlink" title="1、MIME类型"></a>1、MIME类型</h2><p>​        网络上有着数千种不同的数据类型，HTTP仔细地给每种要通过Web传输的对象都打上了名为MIME类型的数据格式标签。</p>
+<p>​        MIME(Multipurpose Internet Mail Extensions)多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。</p>
+<p>​        MIME类型是一种文本标记，表示一种主要的对象类型和一个特殊的子类型，中间由一条斜杠分隔。例如：HTML格式的文本文档是text/html，GIF格式的图片是image/gif</p>
+<p>​        当Web浏览器从服务器中取回一个对象时，会去查看相关的MIME类型，看看是否知道如何处理这个对象，大多数浏览器都可以处理数百种常见的对象类型，或者运行外部插件软件来处理特殊格式的数据。</p>
+<p><strong>常用Mime类型：</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">文件后缀</th>
+<th style="text-align:center">Mime类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.flv</td>
+<td style="text-align:center">flv/flv-flash</td>
+<td style="text-align:center">在线播放</td>
+</tr>
+<tr>
+<td style="text-align:center">.html或.htm</td>
+<td style="text-align:center">text/html</td>
+<td style="text-align:center">超文本标记语言文本</td>
+</tr>
+<tr>
+<td style="text-align:center">.rtf</td>
+<td style="text-align:center">application/rtf</td>
+<td style="text-align:center">RTF文本</td>
+</tr>
+<tr>
+<td style="text-align:center">.gif</td>
+<td style="text-align:center">image/gif</td>
+<td style="text-align:center">GIF图形</td>
+</tr>
+<tr>
+<td style="text-align:center">.jpeg或.jpg</td>
+<td style="text-align:center">image/jpeg</td>
+<td style="text-align:center">JPEG图形</td>
+</tr>
+<tr>
+<td style="text-align:center">.au</td>
+<td style="text-align:center">audio/basic</td>
+<td style="text-align:center">au声音文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.mid或.midi</td>
+<td style="text-align:center">audio/midi或audio/x-midi</td>
+<td style="text-align:center">MIDI音乐文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.ra或.ram或.rm</td>
+<td style="text-align:center">audio/x-pn-realaudio</td>
+<td style="text-align:center">RealAudio音乐文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.mpg或.mpeg或.mp3</td>
+<td style="text-align:center">video/mpeg</td>
+<td style="text-align:center">MPEG文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.avi</td>
+<td style="text-align:center">video/x-msvideo</td>
+<td style="text-align:center">AVI文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.gz</td>
+<td style="text-align:center">application/x-gzip</td>
+<td style="text-align:center">GZIP文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.tar</td>
+<td style="text-align:center">application/x-tar</td>
+<td style="text-align:center">TAR文件</td>
+</tr>
+<tr>
+<td style="text-align:center">.exe</td>
+<td style="text-align:center">application/octet-stream</td>
+<td style="text-align:center">下载文件类型</td>
+</tr>
+<tr>
+<td style="text-align:center">.rmvb</td>
+<td style="text-align:center">video/vnd.rn-realvideo</td>
+<td style="text-align:center">在线播放</td>
+</tr>
+<tr>
+<td style="text-align:center">.txt</td>
+<td style="text-align:center">text/plain</td>
+<td style="text-align:center">普通文本</td>
+</tr>
+<tr>
+<td style="text-align:center">.apk</td>
+<td style="text-align:center">application/vnd.android.package-archive</td>
+<td style="text-align:center">APK文件(安卓系统)</td>
+</tr>
+<tr>
+<td style="text-align:center">.jar</td>
+<td style="text-align:center">application/java-archive</td>
+<td style="text-align:center">JAR文件(JAVA平台手机通用格式)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="2、URI"><a href="#2、URI" class="headerlink" title="2、URI"></a>2、URI</h2><p>​        URI（Uniform Resource Identifier，统一资源标识符)是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。</p>
+<p>URI的格式如下：</p>
+<img src="/2020/11/29/http%E6%A6%82%E8%BF%B0/1.png" class>
+<p>​        使用 http: 或 https: 等协议方案名获取访问资源时要指定协议类型。不区分字母大小写，最后附一个冒号（:），也可使用 data: 或 javascript: 这类指定数据或脚本程序的方案名。</p>
+<p><strong>登录信息（认证）</strong><br>        指定用户名和密码作为从服务器端获取资源时必要的登录信息（身份认证）。此项是可选项。</p>
+<p><strong>服务器地址</strong><br>        使用绝对 URI 必须指定待访问的服务器地址。地址可以是类似hackr.jp 这种 DNS 可解析的名称，或是 192.168.1.1 这类 IPv4 地址名，还可以是 [0:0:0:0:0:0:0:1] 这样用方括号括起来的 IPv6 地址名。</p>
+<p><strong>服务器端口号</strong><br>        指定服务器连接的网络端口号。此项也是可选项，若用户省略则自动使用默认端口号。</p>
+<p><strong>带层次的文件路径</strong><br>        指定服务器上的文件路径来定位特指的资源。这与 UNIX 系统的文件目录结构相似。</p>
+<p><strong>查询字符串</strong><br>        针对已指定的文件路径内的资源，可以使用查询字符串传入任意参数。此项可选。</p>
+<p><strong>片段标识符</strong><br>        使用片段标识符通常可标记出已获取资源中的子资源（文档内的某个位置）。但在 RFC 中并没有明确规定其使用方法。该项也为可选项。</p>
+<p>​        URI 可以进一步划分为定位符（URL），名称（URN）或两者兼备。URL 和 URN 都是 URI 子集。URN 如同一个人的名称，而 URL 代表一个人的住址。换言之，URN 定义某事物的身份，而 URL 提供查找该事物的方法。</p>
+<h2 id="3、URL"><a href="#3、URL" class="headerlink" title="3、URL"></a>3、URL</h2><p>​        URL(Uniform Resource Locator，统一资源定位符），最常见的形式是 URI,经常指定为非正式的网址。</p>
+<p>​        URL 是一种 URI，它标识一个互联网资源，并指定对其进行操作或获取该资源的方法。可能通过对主要访问手段的描述，也可能通过网络“位置”进行标识。例如，<a target="_blank" rel="noopener" href="http://www.waylau.com">http://www.waylau.com</a> 这个 URL，标识一个特定资源（首页）并表示该资源的某种形式（例如以编码字符表示的，首页的 HTML 代码）是可以通过 HTTP 协议从www.waylau.com 这个网络主机获得的。</p>
+<p>​        大部分URL遵循一种标准格式，该格式包含三个部分：<br>​        第一部分：方案；说明了访问资源所使用的协议类型，通常为http协议：hhtp://<br>​        第二部分：地址；比如：www.baidu.com<br>​        第三部分：指定服务器上某个资源，比如：specisal/saw-blade.gif</p>
+<p>​        现在几乎所有的URI都是URL了。</p>
+<h2 id="4、URN"><a href="#4、URN" class="headerlink" title="4、URN"></a>4、URN</h2><p>​        URN（Uniform Resource Name，统一资源名称），是URI的第二种形式，其目的是通过提供一种途径，用于在特定的命名空间资源的标识，以补充网址。</p>
+<p>​        URN 是基于某命名空间通过名称指定资源的URI。URN是作为特定内容的唯一名称使用的，与目前的资源所在地无关。使用这些与位置无关的URN，就可以将资源四处搬移。通过URN，还可以用同一个名字通过多种网络访问协议来访问资源。人们可以通过 URN 来指出某个资源，而无需指出其位置和获得方式。资源无需是基于互联网的。例如，URN urn:isbn:0-395-36341-1 指定标识系统（即国际标准书号ISBN）和某资源在该系统中的唯一表示的 URI。它可以允许人们在不指出其位置和获得方式的情况下谈论这本书。</p>
+<h1 id="三、HTTP事务"><a href="#三、HTTP事务" class="headerlink" title="三、HTTP事务"></a>三、HTTP事务</h1><p>​        一个HTTP事务是由一条请求命令和一个响应结果组成的。这种通信是通过http报文（HTTP message）的格式化数据块进行的。事务也可以理解为从客户端到服务器再到客户端，一次完整通信的过程。</p>
+<h2 id="1、HTTP方法"><a href="#1、HTTP方法" class="headerlink" title="1、HTTP方法"></a>1、HTTP方法</h2><p>​        HTTP的不同的请求命令被称为HTTP方法。每条HTTP请求报文都包含一个方法。这个方法会告诉服务器执行什么动作。例如post，get等。</p>
+<h2 id="2、状态码"><a href="#2、状态码" class="headerlink" title="2、状态码"></a>2、状态码</h2><p>​        每条HTTP响应报文返回时都会携带一个状态码。状态码是一个三位数字的代码，告诉客户端请求是否成功，或者是否需要进行其他的动作。例如404，500，200等。</p>
+<h2 id="3、一个web界面中可以包含多个对象"><a href="#3、一个web界面中可以包含多个对象" class="headerlink" title="3、一个web界面中可以包含多个对象"></a>3、一个web界面中可以包含多个对象</h2><p>​        应用程序完成一项任务时通常会发布多个事务。一个“Web页面”通常不是单个资源，而是一组资源的集合。</p>
+<h1 id="四、报文"><a href="#四、报文" class="headerlink" title="四、报文"></a>四、报文</h1><p>​        HTTP报文是由一行一行的简单字符组成的，是由纯文本组成，不是二进制代码，所以方便人们进行读写。</p>
+<p>​        请求报文（request message）：从客户端发往服务器</p>
+<p>​        响应报文（response message）：从服务器发往客户端</p>
+<p>http报文包括以下三个部分：</p>
+<p><strong>起始行：</strong>报文第一行，在请求报文里用来说明要做什么，在响应报文里说明出现了什么情况</p>
+<p><strong>首部字段：</strong>位于起始行后面，有零个或者多个，每个首部字段都包含一个名字和一个值，便于解析，两者之间用冒号（：）隔开，首部之间以一个空行结束。</p>
+<p><strong>主体：</strong>空行之后就是可选的报文主题。其中包含了所有类型的数据。请求主体中包括了要发送给Web服务器的数据，响应主体找那个装载了要返回给客户端的数据。主体中可以包含任何二进制数据，也可以包含文本。</p>
+<h1 id="五、连接"><a href="#五、连接" class="headerlink" title="五、连接"></a>五、连接</h1><h2 id="1、TCP-IP"><a href="#1、TCP-IP" class="headerlink" title="1、TCP/IP"></a>1、TCP/IP</h2><p>​        http协议是位于整个数据传输通信的最上层应用层协议，不关注细节，负责通信细节的协议为传输层控制协议（Transmission Control Protocl,TCP）</p>
+<p>​        TCP特点：</p>
+<ol>
+<li>无差错的数据传输</li>
+<li>按序传输（按照数据发送顺序到达服务器）</li>
+<li>分段的数据流（任意时刻任何大小将数据发出去）</li>
+</ol>
+<p>​        英特网是全世界计算机和网络设备最常用的层次化分组交换网络协议集，其隐藏了网络和硬件的特点和弱点，使各类型的计算机和网络都能进行可靠的通信。</p>
+<h2 id="2、连接、IP地址及端口号"><a href="#2、连接、IP地址及端口号" class="headerlink" title="2、连接、IP地址及端口号"></a>2、连接、IP地址及端口号</h2><p>​        HTTP客户端向服务器发送报文之前，需要用网际协议（IP）地址和端口号在客户端和服务器之间建立一条TCP/IP连接。而IP和端口则是通过URL来获取。</p>
+<p>​        <a target="_blank" rel="noopener" href="http://207.200.83.29:80/index.html">http://207.200.83.29:80/index.html</a>  这个URL使用了机器的IP地址207.200.83.29，以及端口号80</p>
+<p>​         <a target="_blank" rel="noopener" href="http://www.netscape.com:80/index.html">http://www.netscape.com:80/index.html</a> 这个URL使用了文本形式的域名（主机名：IP地址比较人性化的别称）。通过域名服务（Domain Name Service，DNS）机制对主机名进行转换。</p>
+<p>​        <a target="_blank" rel="noopener" href="http://www.netscape.com/index.html">http://www.netscape.com/index.html</a>  这种情况一般默认端口号为80</p>
+<p>​        下图为浏览器通过http显示服务器中某个简单HTML资源的流程导图</p>
+<img src="/2020/11/29/http%E6%A6%82%E8%BF%B0/2.png" class>
+<p>步骤如下：</p>
+<ol>
+<li>浏览器从URL中解析出服务器主机名；</li>
+<li>浏览器将主机名转换为服务器的IP地址；</li>
+<li>浏览器将端口号（如果有）从URL中解析出来；</li>
+<li>浏览器建立一条与服务器的连接TCP连接通道；</li>
+<li>浏览器向服务器发送一条http请求报文；</li>
+<li>服务器向浏览器发送一条http响应报文；</li>
+<li>结束通信，关闭连接，浏览器显示具体资源；</li>
+</ol>
+<h1 id="六、Web结构组件"><a href="#六、Web结构组件" class="headerlink" title="六、Web结构组件"></a>六、Web结构组件</h1><p>​        web的应用程序，除了浏览器和服务器之外，还有其他几个很重要的组件（简单介绍一下，后面详细介绍）</p>
+<h2 id="1、代理"><a href="#1、代理" class="headerlink" title="1、代理"></a>1、代理</h2><p>​        HTTP代理服务器是Web安全、应用集成以及性能优化的重要组成模块。</p>
+<img src="/2020/11/29/http%E6%A6%82%E8%BF%B0/3.png" class>
+<h2 id="2、缓存"><a href="#2、缓存" class="headerlink" title="2、缓存"></a>2、缓存</h2><p>​        Web缓存(Web Cache)或代理缓存(proxy cache)是一种特殊的HTTP代理服务器，可以将经过代理传送的常用文档复制保存起来。下一个请求同一个文档的客户端就可以共用这个副本提供的服务。</p>
+<p>客户端从缓存下载文件会比从远程服务器快很多。HTTP定义了很多功能，使得缓存更加高效，并规范了文档的新鲜度和缓存内容的隐私性。</p>
+<h2 id="3、网关"><a href="#3、网关" class="headerlink" title="3、网关"></a>3、网关</h2><p>​        网关是一种特殊的服务器，作为其他服务器的中间实体使用。通常用于将HTTP流量转换成其他的协议，接受请求时就好像自己是资源的源服务器。</p>
+<h2 id="4、隧道"><a href="#4、隧道" class="headerlink" title="4、隧道"></a>4、隧道</h2><p>​        隧道是会在两条连接之间对原始数据进行盲转发的HTTP应用程序。</p>
+<p>​        HTTP隧道通常用来在一条或多条HTTP连接上转发非HTTP数据，转发时不会窥探数据。</p>
+<p>​    常见用途是通过HTTP连接承载加密的安全套接字层（SSL）流量，这样SSL流量就可以穿过只允许Web流量通过的防火墙。</p>
+<h2 id="5、Agent代理"><a href="#5、Agent代理" class="headerlink" title="5、Agent代理"></a>5、Agent代理</h2><p>​        用户Agent代理是代表用户发起HTTP请求的客户端程序。所有发布Web请求的应用程序都是HTTP Agent代理，如Web浏览器。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/pic13.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/30/%E4%BC%AA%E5%8D%8F%E8%AE%AE/"><img class="prev-cover" src="/img/pic3.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">伪协议</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/24/henu/"><img class="next-cover" src="/img/pic8.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">henu</div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Ephemeral-fever</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Web%E9%A1%B5%E9%9D%A2%E7%94%9F%E6%88%90%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">一、Web页面生成原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Web%E8%B5%84%E6%BA%90"><span class="toc-number">2.</span> <span class="toc-text">二、Web资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81MIME%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1、MIME类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81URI"><span class="toc-number">2.2.</span> <span class="toc-text">2、URI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81URL"><span class="toc-number">2.3.</span> <span class="toc-text">3、URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81URN"><span class="toc-number">2.4.</span> <span class="toc-text">4、URN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81HTTP%E4%BA%8B%E5%8A%A1"><span class="toc-number">3.</span> <span class="toc-text">三、HTTP事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81HTTP%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">1、HTTP方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-number">3.2.</span> <span class="toc-text">2、状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E4%B8%80%E4%B8%AAweb%E7%95%8C%E9%9D%A2%E4%B8%AD%E5%8F%AF%E4%BB%A5%E5%8C%85%E5%90%AB%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.3.</span> <span class="toc-text">3、一个web界面中可以包含多个对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%8A%A5%E6%96%87"><span class="toc-number">4.</span> <span class="toc-text">四、报文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%BF%9E%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">五、连接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81TCP-IP"><span class="toc-number">5.1.</span> <span class="toc-text">1、TCP&#x2F;IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E8%BF%9E%E6%8E%A5%E3%80%81IP%E5%9C%B0%E5%9D%80%E5%8F%8A%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-number">5.2.</span> <span class="toc-text">2、连接、IP地址及端口号</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81Web%E7%BB%93%E6%9E%84%E7%BB%84%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">六、Web结构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">6.1.</span> <span class="toc-text">1、代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E7%BC%93%E5%AD%98"><span class="toc-number">6.2.</span> <span class="toc-text">2、缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E7%BD%91%E5%85%B3"><span class="toc-number">6.3.</span> <span class="toc-text">3、网关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E9%9A%A7%E9%81%93"><span class="toc-number">6.4.</span> <span class="toc-text">4、隧道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81Agent%E4%BB%A3%E7%90%86"><span class="toc-number">6.5.</span> <span class="toc-text">5、Agent代理</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/01/12/%E4%BD%8E%E5%8A%A0%E5%AF%86%E6%8C%87%E6%95%B0%E6%94%BB%E5%87%BB/" title="低加密指数攻击"><img src="/img/pic6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="低加密指数攻击"/></a><div class="content"><a class="title" href="/2022/01/12/%E4%BD%8E%E5%8A%A0%E5%AF%86%E6%8C%87%E6%95%B0%E6%94%BB%E5%87%BB/" title="低加密指数攻击">低加密指数攻击</a><time datetime="2022-01-12T01:27:11.000Z" title="发表于 2022-01-12 09:27:11">2022-01-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/11/%E4%BD%8E%E5%8A%A0%E5%AF%86%E6%8C%87%E6%95%B0%E5%B9%BF%E6%92%AD%E6%94%BB%E5%87%BB/" title="低加密指数广播攻击"><img src="/img/pic20.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="低加密指数广播攻击"/></a><div class="content"><a class="title" href="/2022/01/11/%E4%BD%8E%E5%8A%A0%E5%AF%86%E6%8C%87%E6%95%B0%E5%B9%BF%E6%92%AD%E6%94%BB%E5%87%BB/" title="低加密指数广播攻击">低加密指数广播攻击</a><time datetime="2022-01-11T01:14:17.000Z" title="发表于 2022-01-11 09:14:17">2022-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/10/%E5%85%B1%E6%A8%A1n%E6%94%BB%E5%87%BB/" title="共模n攻击"><img src="/img/pic9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="共模n攻击"/></a><div class="content"><a class="title" href="/2022/01/10/%E5%85%B1%E6%A8%A1n%E6%94%BB%E5%87%BB/" title="共模n攻击">共模n攻击</a><time datetime="2022-01-10T06:38:10.000Z" title="发表于 2022-01-10 14:38:10">2022-01-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/09/%E9%95%BF%E5%AE%89%E2%80%9C%E6%88%98%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%AB%E5%A3%AB%E5%AE%88%E6%8A%A4%E8%B5%9Bcrypto/" title="长安“战疫”网络安全卫士守护赛crypto"><img src="/img/pic19.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="长安“战疫”网络安全卫士守护赛crypto"/></a><div class="content"><a class="title" href="/2022/01/09/%E9%95%BF%E5%AE%89%E2%80%9C%E6%88%98%E7%96%AB%E2%80%9D%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%8D%AB%E5%A3%AB%E5%AE%88%E6%8A%A4%E8%B5%9Bcrypto/" title="长安“战疫”网络安全卫士守护赛crypto">长安“战疫”网络安全卫士守护赛crypto</a><time datetime="2022-01-09T13:19:42.000Z" title="发表于 2022-01-09 21:19:42">2022-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/07/%E5%85%AC%E9%92%A5%E6%8F%90%E5%8F%96/" title="公钥提取"><img src="/img/pic12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="公钥提取"/></a><div class="content"><a class="title" href="/2022/01/07/%E5%85%AC%E9%92%A5%E6%8F%90%E5%8F%96/" title="公钥提取">公钥提取</a><time datetime="2022-01-07T08:36:14.000Z" title="发表于 2022-01-07 16:36:14">2022-01-07</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Ephemeral-fever</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
