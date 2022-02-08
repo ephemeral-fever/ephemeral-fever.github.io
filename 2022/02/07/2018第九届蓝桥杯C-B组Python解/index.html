@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2018第九届蓝桥杯C++B组Python解 | Ephemeral-fever</title><meta name="keywords" content="蓝桥杯"><meta name="author" content="Ephemeral-fever"><meta name="copyright" content="Ephemeral-fever"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="A第几天2000年的1月1日，是那一年的第1天。那么，2000年的5月4日，是那一年的第几天？注意：需要提交的是一个整数，不要填写任何多余内容。 答案：125 31+29+31+30+4&#x3D;125 B明码汉字的字形存在于字库中，即便在今天，16点阵的字库也仍然使用广泛。 16点阵的字库把每个汉字看成是16x16个像素信息。并把这些信息记录在字节中。 一个字节可以存储8位信息，用32个字节就可以存一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018第九届蓝桥杯C++B组Python解">
+<meta property="og:url" content="http://example.com/2022/02/07/2018%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Ephemeral-fever">
+<meta property="og:description" content="A第几天2000年的1月1日，是那一年的第1天。那么，2000年的5月4日，是那一年的第几天？注意：需要提交的是一个整数，不要填写任何多余内容。 答案：125 31+29+31+30+4&#x3D;125 B明码汉字的字形存在于字库中，即便在今天，16点阵的字库也仍然使用广泛。 16点阵的字库把每个汉字看成是16x16个像素信息。并把这些信息记录在字节中。 一个字节可以存储8位信息，用32个字节就可以存一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/pic16.jpg">
+<meta property="article:published_time" content="2022-02-07T05:45:35.000Z">
+<meta property="article:modified_time" content="2022-02-08T11:05:13.111Z">
+<meta property="article:author" content="Ephemeral-fever">
+<meta property="article:tag" content="蓝桥杯">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/pic16.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/02/07/2018%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="yandex-verification" content="{&quot;enable&quot;:true}"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-08 19:05:13'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">60</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/pic16.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ephemeral-fever</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">2018第九届蓝桥杯C++B组Python解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-07T05:45:35.000Z" title="发表于 2022-02-07 13:45:35">2022-02-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-08T11:05:13.111Z" title="更新于 2022-02-08 19:05:13">2022-02-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="A第几天"><a href="#A第几天" class="headerlink" title="A第几天"></a>A第几天</h1><p>2000年的1月1日，是那一年的第1天。<br>那么，2000年的5月4日，是那一年的第几天？<br>注意：需要提交的是一个整数，不要填写任何多余内容。</p>
+<p>答案：125</p>
+<p>31+29+31+30+4=125</p>
+<h1 id="B明码"><a href="#B明码" class="headerlink" title="B明码"></a>B明码</h1><p>汉字的字形存在于字库中，即便在今天，16点阵的字库也仍然使用广泛。<br> 16点阵的字库把每个汉字看成是16x16个像素信息。并把这些信息记录在字节中。</p>
+<p>一个字节可以存储8位信息，用32个字节就可以存一个汉字的字形了。<br> 把每个字节转为2进制表示，1表示墨迹，0表示底色。每行2个字节，<br> 一共16行，布局是：</p>
+<p>第1字节，第2字节<br>第3字节，第4字节<br>…<br>第31字节, 第32字节</p>
+<p>这道题目是给你一段多个汉字组成的信息，每个汉字用32个字节表示，这里给出了字节作为有符号整数的值。</p>
+<p>题目的要求隐藏在这些信息中。你的任务是复原这些汉字的字形，从中看出题目的要求，并根据要求填写答案。</p>
+<p>这段信息是（一共10个汉字）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4 0 4 0 4 0 4 32 -1 -16 4 32 4 32 4 32 4 32 4 32 8 32 8 32 16 34 16 34 32 30 -64 0</span><br><span class="line">16 64 16 64 34 68 127 126 66 -124 67 4 66 4 66 -124 126 100 66 36 66 4 66 4 66 4 126 4 66 40 0 16</span><br><span class="line">4 0 4 0 4 0 4 32 -1 -16 4 32 4 32 4 32 4 32 4 32 8 32 8 32 16 34 16 34 32 30 -64 0</span><br><span class="line">0 -128 64 -128 48 -128 17 8 1 -4 2 8 8 80 16 64 32 64 -32 64 32 -96 32 -96 33 16 34 8 36 14 40 4</span><br><span class="line">4 0 3 0 1 0 0 4 -1 -2 4 0 4 16 7 -8 4 16 4 16 4 16 8 16 8 16 16 16 32 -96 64 64</span><br><span class="line">16 64 20 72 62 -4 73 32 5 16 1 0 63 -8 1 0 -1 -2 0 64 0 80 63 -8 8 64 4 64 1 64 0 -128</span><br><span class="line">0 16 63 -8 1 0 1 0 1 0 1 4 -1 -2 1 0 1 0 1 0 1 0 1 0 1 0 1 0 5 0 2 0</span><br><span class="line">2 0 2 0 7 -16 8 32 24 64 37 -128 2 -128 12 -128 113 -4 2 8 12 16 18 32 33 -64 1 0 14 0 112 0</span><br><span class="line">1 0 1 0 1 0 9 32 9 16 17 12 17 4 33 16 65 16 1 32 1 64 0 -128 1 0 2 0 12 0 112 0</span><br><span class="line">0 0 0 0 7 -16 24 24 48 12 56 12 0 56 0 -32 0 -64 0 -128 0 0 0 0 1 -128 3 -64 1 -128 0 0</span><br></pre></td></tr></table></figure>
+<p>文字：九的九次方等于多少</p>
+<p>答案：387420489</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">raw=[<span class="string">&quot;4 0 4 0 4 0 4 32 -1 -16 4 32 4 32 4 32 4 32 4 32 8 32 8 32 16 34 16 34 32 30 -64 0&quot;</span>,</span><br><span class="line"><span class="string">&#x27;16 64 16 64 34 68 127 126 66 -124 67 4 66 4 66 -124 126 100 66 36 66 4 66 4 66 4 126 4 66 40 0 16&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;4 0 4 0 4 0 4 32 -1 -16 4 32 4 32 4 32 4 32 4 32 8 32 8 32 16 34 16 34 32 30 -64 0&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;0 -128 64 -128 48 -128 17 8 1 -4 2 8 8 80 16 64 32 64 -32 64 32 -96 32 -96 33 16 34 8 36 14 40 4&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;4 0 3 0 1 0 0 4 -1 -2 4 0 4 16 7 -8 4 16 4 16 4 16 8 16 8 16 16 16 32 -96 64 64&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;16 64 20 72 62 -4 73 32 5 16 1 0 63 -8 1 0 -1 -2 0 64 0 80 63 -8 8 64 4 64 1 64 0 -128&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;0 16 63 -8 1 0 1 0 1 0 1 4 -1 -2 1 0 1 0 1 0 1 0 1 0 1 0 1 0 5 0 2 0&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;2 0 2 0 7 -16 8 32 24 64 37 -128 2 -128 12 -128 113 -4 2 8 12 16 18 32 33 -64 1 0 14 0 112 0&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;1 0 1 0 1 0 9 32 9 16 17 12 17 4 33 16 65 16 1 32 1 64 0 -128 1 0 2 0 12 0 112 0&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;0 0 0 0 7 -16 24 24 48 12 56 12 0 56 0 -32 0 -64 0 -128 0 0 0 0 1 -128 3 -64 1 -128 0 0&#x27;</span>]</span><br><span class="line">words=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> raw:</span><br><span class="line">    words.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,i.split())))</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> words:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(line)):</span><br><span class="line">        <span class="keyword">if</span> line[j]==<span class="number">-128</span>:</span><br><span class="line">            print(<span class="string">&quot;10000000&quot;</span>,end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> line[j]&gt;=<span class="number">0</span>:</span><br><span class="line">            print(<span class="string">&quot;&#123;:0&gt;8b&#125;&quot;</span>.<span class="built_in">format</span>(line[j]),end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;1&#123;:1&gt;7b&#125;&quot;</span>.<span class="built_in">format</span>(<span class="built_in">abs</span>(line[j])),end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> j%<span class="number">2</span>==<span class="number">1</span>:</span><br><span class="line">            print()</span><br><span class="line">    print()</span><br></pre></td></tr></table></figure>
+<h1 id="C乘积尾零"><a href="#C乘积尾零" class="headerlink" title="C乘积尾零"></a>C乘积尾零</h1><p>如下的10行数据，每行有10个整数，请你求出它们的乘积的末尾有多少个零？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5650 4542 3554 473 946 4114 3871 9073 90 4329</span><br><span class="line">2758 7949 6113 5659 5245 7432 3051 4434 6704 3594</span><br><span class="line">9937 1173 6866 3397 4759 7557 3070 2287 1453 9899</span><br><span class="line">1486 5722 3135 1170 4014 5510 5120 729 2880 9019</span><br><span class="line">2049 698 4582 4346 4427 646 9742 7340 1230 7683</span><br><span class="line">5693 7015 6887 7381 4172 4341 2909 2027 7355 5649</span><br><span class="line">6701 6645 1671 5978 2704 9926 295 3125 3878 6785</span><br><span class="line">2066 4247 4800 1578 6652 4616 1113 6205 3264 2915</span><br><span class="line">3966 5291 2904 1285 2193 1428 2265 8730 9436 7074</span><br><span class="line">689 5510 8243 6114 337 4096 8199 7313 3685 211</span><br></pre></td></tr></table></figure>
+<p>答案：31</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num=[<span class="number">5650</span>, <span class="number">4542</span>, <span class="number">3554</span>, <span class="number">473</span>, <span class="number">946</span>, <span class="number">4114</span>, <span class="number">3871</span>, <span class="number">9073</span>, <span class="number">90</span>, <span class="number">4329</span>, </span><br><span class="line"><span class="number">2758</span>, <span class="number">7949</span>, <span class="number">6113</span>,<span class="number">5659</span>, <span class="number">5245</span>, <span class="number">7432</span>, <span class="number">3051</span>, <span class="number">4434</span>, <span class="number">6704</span>, <span class="number">3594</span>,</span><br><span class="line"> <span class="number">9937</span>, <span class="number">1173</span>, <span class="number">6866</span>, <span class="number">3397</span>, <span class="number">4759</span>, <span class="number">7557</span>, <span class="number">3070</span>, <span class="number">2287</span>, <span class="number">1453</span>, <span class="number">9899</span>, </span><br><span class="line"> <span class="number">1486</span>, <span class="number">5722</span>, <span class="number">3135</span>, <span class="number">1170</span>, <span class="number">4014</span>, <span class="number">5510</span>, <span class="number">5120</span>, <span class="number">729</span>, <span class="number">2880</span>, <span class="number">9019</span>, </span><br><span class="line"> <span class="number">2049</span>, <span class="number">698</span>, <span class="number">4582</span>, <span class="number">4346</span>, <span class="number">4427</span>, <span class="number">646</span>, <span class="number">9742</span>, <span class="number">7340</span>, <span class="number">1230</span>, <span class="number">7683</span>, </span><br><span class="line"> <span class="number">5693</span>, <span class="number">7015</span>, <span class="number">6887</span>, <span class="number">7381</span>, <span class="number">4172</span>, <span class="number">4341</span>, <span class="number">2909</span>, <span class="number">2027</span>, <span class="number">7355</span>, <span class="number">5649</span>, </span><br><span class="line"> <span class="number">6701</span>, <span class="number">6645</span>, <span class="number">1671</span>, <span class="number">5978</span>, <span class="number">2704</span>, <span class="number">9926</span>, <span class="number">295</span>, <span class="number">3125</span>, <span class="number">3878</span>, <span class="number">6785</span>, </span><br><span class="line"> <span class="number">2066</span>, <span class="number">4247</span>, <span class="number">4800</span>, <span class="number">1578</span>, <span class="number">6652</span>, <span class="number">4616</span>, <span class="number">1113</span>, <span class="number">6205</span>, <span class="number">3264</span>, <span class="number">2915</span>, </span><br><span class="line"> <span class="number">3966</span>, <span class="number">5291</span>, <span class="number">2904</span>, <span class="number">1285</span>, <span class="number">2193</span>, <span class="number">1428</span>, <span class="number">2265</span>, <span class="number">8730</span>, <span class="number">9436</span>, <span class="number">7074</span>,</span><br><span class="line">  <span class="number">689</span>, <span class="number">5510</span>, <span class="number">8243</span>, <span class="number">6114</span>, <span class="number">337</span>, <span class="number">4096</span>, <span class="number">8199</span>, <span class="number">7313</span>, <span class="number">3685</span>, <span class="number">211</span>] </span><br><span class="line">cnt=<span class="number">0</span></span><br><span class="line">res=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> num:</span><br><span class="line">    res*=i</span><br><span class="line">    <span class="keyword">while</span> res%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">        res//=<span class="number">10</span></span><br><span class="line">        cnt+=<span class="number">1</span></span><br><span class="line">print(cnt)</span><br><span class="line"><span class="comment">#31</span></span><br></pre></td></tr></table></figure>
+<h1 id="D测试次数"><a href="#D测试次数" class="headerlink" title="D测试次数"></a>D测试次数</h1><p>x星球的居民脾气不太好，但好在他们生气的时候唯一的异常举动是：摔手机。</p>
+<p>各大厂商也就纷纷推出各种耐摔型手机。x星球的质监局规定了手机必须经过耐摔测试，并且评定出一个耐摔指数来，之后才允许上市流通。</p>
+<p>x星球有很多高耸入云的高塔，刚好可以用来做耐摔测试。塔的每一层高度都是一样的，与地球上稍有不同的是，他们的第一层不是地面，而是相当于我们的2楼。</p>
+<p>如果手机从第7层扔下去没摔坏，但第8层摔坏了，则手机耐摔指数=7。</p>
+<p>特别地，如果手机从第1层扔下去就坏了，则耐摔指数=0。</p>
+<p>如果到了塔的最高层第n层扔没摔坏，则耐摔指数=n</p>
+<p>为了减少测试次数，从每个厂家抽样3部手机参加测试。</p>
+<p>某次测试的塔高为1000层，如果我们总是采用最佳策略，在最坏的运气下最多需要测试多少次才能确定手机的耐摔指数呢？</p>
+<p>请填写这个最多测试次数。</p>
+<p>注意：需要填写的是一个整数，不要填写任何多余内容。</p>
+<h1 id="E快速排序"><a href="#E快速排序" class="headerlink" title="E快速排序"></a>E快速排序</h1><p>以下代码可以从数组a[]中找出第k小的元素。</p>
+<p>它使用了类似快速排序中的分治算法，期望时间复杂度是O(N)的。</p>
+<p>请仔细阅读分析源码，填写划线部分缺失的内容。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quick_select</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p = rand() % (r - l + <span class="number">1</span>) + l;</span><br><span class="line">	<span class="keyword">int</span> x = a[p];</span><br><span class="line">	&#123;<span class="keyword">int</span> t = a[p]; a[p] = a[r]; a[r] = t;&#125;</span><br><span class="line">	<span class="keyword">int</span> i = l, j = r;</span><br><span class="line">	<span class="keyword">while</span>(i &lt; j) &#123;</span><br><span class="line">		<span class="keyword">while</span>(i &lt; j &amp;&amp; a[i] &lt; x) i++;</span><br><span class="line">		<span class="keyword">if</span>(i &lt; j) &#123;</span><br><span class="line">			a[j] = a[i];</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(i &lt; j &amp;&amp; a[j] &gt; x) j--;</span><br><span class="line">		<span class="keyword">if</span>(i &lt; j) &#123;</span><br><span class="line">			a[i] = a[j];</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	a[i] = x;</span><br><span class="line">	p = i;</span><br><span class="line">	<span class="keyword">if</span>(i - l + <span class="number">1</span> == k) <span class="keyword">return</span> a[i];</span><br><span class="line">	<span class="keyword">if</span>(i - l + <span class="number">1</span> &lt; k) <span class="keyword">return</span> quick_select( _____________________________ ); <span class="comment">//填空</span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> quick_select(a, l, i - <span class="number">1</span>, k);</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[] = &#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">23</span>, <span class="number">58</span>, <span class="number">16</span>, <span class="number">27</span>, <span class="number">55</span>, <span class="number">13</span>, <span class="number">26</span>, <span class="number">24</span>, <span class="number">12</span>&#125;;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, quick_select(a, <span class="number">0</span>, <span class="number">14</span>, <span class="number">5</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：只填写划线部分缺少的代码，不要抄写已经存在的代码或符号。</p>
+<p>答案：<code>a,i+1,r,k-(i-l+1)</code></p>
+<h1 id="F递增三元组"><a href="#F递增三元组" class="headerlink" title="F递增三元组"></a>F递增三元组</h1><p>给定三个整数数组</p>
+<p>A = [A1, A2, … AN],</p>
+<p>B = [B1, B2, … BN],</p>
+<p>C = [C1, C2, … CN]，</p>
+<p>请你统计有多少个三元组(i, j, k) 满足：</p>
+<ol>
+<li>1 &lt;= i, j, k &lt;= N</li>
+<li>Ai &lt; Bj &lt; Ck</li>
+</ol>
+<p>【输入格式】<br>第一行包含一个整数N。<br>第二行包含N个整数A1, A2, … AN。<br>第三行包含N个整数B1, B2, … BN。<br>第四行包含N个整数C1, C2, … CN。</p>
+<p>对于30%的数据，1 &lt;= N &lt;= 100<br>对于60%的数据，1 &lt;= N &lt;= 1000<br>对于100%的数据，1 &lt;= N &lt;= 100000    0 &lt;= Ai, Bi, Ci &lt;= 100000 </p>
+<p>【输出格式】<br>一个整数表示答案</p>
+<p>【样例输入】</p>
+<p>3<br>1 1 1<br>2 2 2<br>3 3 3 </p>
+<p>【样例输出】</p>
+<p> 27 </p>
+<p>思路：</p>
+<p>遍历b数组的数字，然后找a数组中有几个比他小，c数组中有几个比他大，乘起来累加就是答案</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">a=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split()))</span><br><span class="line">b=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split()))</span><br><span class="line">c=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split()))</span><br><span class="line">a.sort()</span><br><span class="line">b.sort()</span><br><span class="line">c.sort()</span><br><span class="line">res=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    cnt1=cnt2=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        <span class="keyword">if</span> a[j]&lt;b[i]:</span><br><span class="line">            cnt1+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> c[j]&gt;b[i]:</span><br><span class="line">            cnt2+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    res+=cnt1*cnt2</span><br><span class="line">print(res)</span><br><span class="line"><span class="comment">#python能过75%，c++应该能全过</span></span><br></pre></td></tr></table></figure>
+<h1 id="G螺旋折线"><a href="#G螺旋折线" class="headerlink" title="G螺旋折线"></a>G螺旋折线</h1><p>如图p1.png所示的螺旋折线经过平面上所有整点恰好一次。<br>对于整点(X, Y)，我们定义它到原点的距离dis(X, Y)是从原点到(X, Y)的螺旋折线段的长度。</p>
+<p>例如dis(0, 1)=3, dis(-2, -1)=9</p>
+<p>给出整点坐标(X, Y)，你能计算出dis(X, Y)吗？</p>
+<p>【输入格式】<br>X和Y</p>
+<p>对于40%的数据，-1000 &lt;= X, Y &lt;= 1000<br>对于70%的数据，-100000 &lt;= X， Y &lt;= 100000<br>对于100%的数据, -1000000000 &lt;= X, Y &lt;= 1000000000</p>
+<p>【输出格式】<br>输出dis(X, Y)</p>
+<p>【样例输入】<br>0 1</p>
+<p>【样例输出】<br>3</p>
+<p><img src="https://gitee.com/h0110w/blogpic/raw/master/img/202202081700539.png" alt="p1"></p>
+<p>思路：</p>
+<p>注意数据规模，十亿的量级肯定不是模拟能过的，所以要找规律，找到规律就能以常数的时间复杂度通过。</p>
+<p>对该图做一些变换，如下图：</p>
+<p><img src="https://gitee.com/h0110w/blogpic/raw/master/img/202202081831857.png" alt="image-20220208183108773"></p>
+<p>图中描黑的线我把它顺时针旋转90度，螺旋折线就变成了一个个回字形，不妨设最里面一层为第一层，他的边长为2，然后是第二层，边长为4，……，依此类推第i层边长为2i，周长为4*2i。这是一个等差数列，所以从里到外n层的总长度为4n(n+1)。</p>
+<p>继续观察我们会发现坐标系中任意一点所在层数为横纵坐标绝对值中较大的那个。所以我们可以先根据这个层数算出一个略大于真实长度的值，然后倒退回去，倒退的起点就是旋转后一个个正方形的最下顶点。然后就可以根据点的位置分类讨论，把多余的部分一段段减掉，最终得出结果。</p>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">x,y=<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split())</span><br><span class="line">ceng=<span class="built_in">max</span>(<span class="built_in">abs</span>(x),<span class="built_in">abs</span>(y))</span><br><span class="line">res=<span class="number">4</span>*ceng*(ceng+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">if</span> x&gt;=<span class="number">0</span>:</span><br><span class="line">    res-=ceng</span><br><span class="line">    <span class="keyword">if</span> y&lt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(y)==ceng:</span><br><span class="line">            res-=x</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res-=ceng</span><br><span class="line">            res-=ceng-<span class="built_in">abs</span>(y)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res-=ceng*<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> x==ceng:</span><br><span class="line">            res-=y</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res-=ceng</span><br><span class="line">            res-=ceng-x</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    res-=ceng*<span class="number">5</span></span><br><span class="line">    <span class="keyword">if</span> y&gt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> y==ceng:</span><br><span class="line">            res-=<span class="built_in">abs</span>(x)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res-=ceng</span><br><span class="line">            res-=ceng-y</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res-=ceng*<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(x)==ceng:</span><br><span class="line">            res-=<span class="built_in">abs</span>(y)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res-=ceng<span class="number">-1</span></span><br><span class="line">            res-=ceng-<span class="built_in">abs</span>(x)</span><br><span class="line">print(res)</span><br><span class="line"><span class="comment">#100%通过</span></span><br></pre></td></tr></table></figure>
+<h1 id="H日志统计"><a href="#H日志统计" class="headerlink" title="H日志统计"></a>H日志统计</h1><p>小明维护着一个程序员论坛。现在他收集了一份”点赞”日志，日志共有N行。其中每一行的格式是：</p>
+<p>ts id</p>
+<p>表示在ts时刻编号id的帖子收到一个”赞”。</p>
+<p>现在小明想统计有哪些帖子曾经是”热帖”。如果一个帖子曾在任意一个长度为D的时间段内收到不少于K个赞，小明就认为这个帖子曾是”热帖”。</p>
+<p>具体来说，如果存在某个时刻T满足该帖在[T, T+D)这段时间内(注意是左闭右开区间)收到不少于K个赞，该帖就曾是”热帖”。</p>
+<p>给定日志，请你帮助小明统计出所有曾是”热帖”的帖子编号。</p>
+<p>【输入格式】<br>第一行包含三个整数N、D和K。<br>以下N行每行一条日志，包含两个整数ts和id。</p>
+<p>对于50%的数据，1 &lt;= K &lt;= N &lt;= 1000<br>对于100%的数据，1 &lt;= K &lt;= N &lt;= 100000 0 &lt;= ts &lt;= 100000 0 &lt;= id &lt;= 100000</p>
+<p>【输出格式】<br>按从小到大的顺序输出热帖id。每个id一行。</p>
+<p>【输入样例】<br>7 10 2<br>0 1<br>0 10<br>10 10<br>10 1<br>9 1<br>100 3<br>100 3</p>
+<p>【输出样例】<br>1<br>3</p>
+<h1 id="I全球变暖"><a href="#I全球变暖" class="headerlink" title="I全球变暖"></a>I全球变暖</h1><p>你有一张某海域NxN像素的照片，”.”表示海洋、”#”表示陆地，如下所示：</p>
+<p>…….<br>.##….<br>.##….<br>….##.<br>..####.<br>…###.<br>…….</p>
+<p>其中”上下左右”四个方向上连在一起的一片陆地组成一座岛屿。例如上图就有2座岛屿。</p>
+<p>由于全球变暖导致了海面上升，科学家预测未来几十年，岛屿边缘一个像素的范围会被海水淹没。具体来说如果一块陆地像素与海洋相邻(上下左右四个相邻像素中有海洋)，它就会被淹没。</p>
+<p>例如上图中的海域未来会变成如下样子：</p>
+<p>…….<br>…….<br>…….<br>…….<br>….#..<br>…….<br>…….</p>
+<p>请你计算：依照科学家的预测，照片中有多少岛屿会被完全淹没。</p>
+<p>【输入格式】<br>第一行包含一个整数N。 (1 &lt;= N &lt;= 1000)<br>以下N行N列代表一张海域照片。</p>
+<p>照片保证第1行、第1列、第N行、第N列的像素都是海洋。</p>
+<p>【输出格式】<br>一个整数表示答案。</p>
+<p>【输入样例】<br>7<br>…….<br>.##….<br>.##….<br>….##.<br>..####.<br>…###.<br>…….</p>
+<p>【输出样例】<br>1</p>
+<h1 id="J最大乘积"><a href="#J最大乘积" class="headerlink" title="J最大乘积"></a>J最大乘积</h1><p>你有一张某海域NxN像素的照片，”.”表示海洋、”#”表示陆地，如下所示：</p>
+<p>…….<br>.##….<br>.##….<br>….##.<br>..####.<br>…###.<br>…….</p>
+<p>其中”上下左右”四个方向上连在一起的一片陆地组成一座岛屿。例如上图就有2座岛屿。</p>
+<p>由于全球变暖导致了海面上升，科学家预测未来几十年，岛屿边缘一个像素的范围会被海水淹没。具体来说如果一块陆地像素与海洋相邻(上下左右四个相邻像素中有海洋)，它就会被淹没。</p>
+<p>例如上图中的海域未来会变成如下样子：</p>
+<p>…….<br>…….<br>…….<br>…….<br>….#..<br>…….<br>…….</p>
+<p>请你计算：依照科学家的预测，照片中有多少岛屿会被完全淹没。</p>
+<p>【输入格式】<br>第一行包含一个整数N。 (1 &lt;= N &lt;= 1000)<br>以下N行N列代表一张海域照片。</p>
+<p>照片保证第1行、第1列、第N行、第N列的像素都是海洋。</p>
+<p>【输出格式】<br>一个整数表示答案。</p>
+<p>【输入样例】<br>7<br>…….<br>.##….<br>.##….<br>….##.<br>..####.<br>…###.<br>…….</p>
+<p>【输出样例】<br>1</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a></div><div class="post_share"><div class="social-share" data-image="/img/pic16.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/02/05/2019%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/"><img class="next-cover" src="/img/pic23.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2019第十届蓝桥杯C++B组Python解</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/01/16/2020第十一届蓝桥杯Python组/" title="2020第十一届蓝桥杯Python组"><img class="cover" src="/img/pic18.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-16</div><div class="title">2020第十一届蓝桥杯Python组</div></div></a></div><div><a href="/2022/01/13/2021第十二届蓝桥杯Python组/" title="2021第十二届蓝桥杯Python组"><img class="cover" src="/img/pic12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-13</div><div class="title">2021第十二届蓝桥杯Python组</div></div></a></div><div><a href="/2022/02/05/2019第十届蓝桥杯C-B组Python解/" title="2019第十届蓝桥杯C++B组Python解"><img class="cover" src="/img/pic23.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-05</div><div class="title">2019第十届蓝桥杯C++B组Python解</div></div></a></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/head-sculpture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Ephemeral-fever</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">60</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ephemeral-fever"><i class="fab fa-github"></i><span>Follow Me</span></a></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">芜湖，起飞！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A%E7%AC%AC%E5%87%A0%E5%A4%A9"><span class="toc-number">1.</span> <span class="toc-text">A第几天</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B%E6%98%8E%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">B明码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C%E4%B9%98%E7%A7%AF%E5%B0%BE%E9%9B%B6"><span class="toc-number">3.</span> <span class="toc-text">C乘积尾零</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D%E6%B5%8B%E8%AF%95%E6%AC%A1%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">D测试次数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">5.</span> <span class="toc-text">E快速排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F%E9%80%92%E5%A2%9E%E4%B8%89%E5%85%83%E7%BB%84"><span class="toc-number">6.</span> <span class="toc-text">F递增三元组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#G%E8%9E%BA%E6%97%8B%E6%8A%98%E7%BA%BF"><span class="toc-number">7.</span> <span class="toc-text">G螺旋折线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#H%E6%97%A5%E5%BF%97%E7%BB%9F%E8%AE%A1"><span class="toc-number">8.</span> <span class="toc-text">H日志统计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#I%E5%85%A8%E7%90%83%E5%8F%98%E6%9A%96"><span class="toc-number">9.</span> <span class="toc-text">I全球变暖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#J%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF"><span class="toc-number">10.</span> <span class="toc-text">J最大乘积</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/07/2018%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/" title="2018第九届蓝桥杯C++B组Python解"><img src="/img/pic16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2018第九届蓝桥杯C++B组Python解"/></a><div class="content"><a class="title" href="/2022/02/07/2018%E7%AC%AC%E4%B9%9D%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/" title="2018第九届蓝桥杯C++B组Python解">2018第九届蓝桥杯C++B组Python解</a><time datetime="2022-02-07T05:45:35.000Z" title="发表于 2022-02-07 13:45:35">2022-02-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/05/2019%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/" title="2019第十届蓝桥杯C++B组Python解"><img src="/img/pic23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2019第十届蓝桥杯C++B组Python解"/></a><div class="content"><a class="title" href="/2022/02/05/2019%E7%AC%AC%E5%8D%81%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AFC-B%E7%BB%84Python%E8%A7%A3/" title="2019第十届蓝桥杯C++B组Python解">2019第十届蓝桥杯C++B组Python解</a><time datetime="2022-02-05T05:24:27.000Z" title="发表于 2022-02-05 13:24:27">2022-02-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/04/Prim%E7%AE%97%E6%B3%95/" title="Prim算法"><img src="/img/pic13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Prim算法"/></a><div class="content"><a class="title" href="/2022/02/04/Prim%E7%AE%97%E6%B3%95/" title="Prim算法">Prim算法</a><time datetime="2022-02-04T05:16:28.000Z" title="发表于 2022-02-04 13:16:28">2022-02-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/19/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/" title="完全背包"><img src="/img/pic3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="完全背包"/></a><div class="content"><a class="title" href="/2022/01/19/%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85/" title="完全背包">完全背包</a><time datetime="2022-01-19T08:30:22.000Z" title="发表于 2022-01-19 16:30:22">2022-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/19/RSA%E5%B7%B2%E7%9F%A5%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" title="RSA已知高位攻击"><img src="/img/pic16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RSA已知高位攻击"/></a><div class="content"><a class="title" href="/2022/01/19/RSA%E5%B7%B2%E7%9F%A5%E9%AB%98%E4%BD%8D%E6%94%BB%E5%87%BB/" title="RSA已知高位攻击">RSA已知高位攻击</a><time datetime="2022-01-19T02:28:35.000Z" title="发表于 2022-01-19 10:28:35">2022-01-19</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/background.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Ephemeral-fever</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://ephemeral-fever.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
